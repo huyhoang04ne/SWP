@@ -1,0 +1,22 @@
+# Visual Studio cache
+.vs/
+
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+
+# IDE configs
+.vscode/
+.idea/
+
+# EF Migrations
+**/Migrations/
+
+git rm -r --cached .vs
+
+git rm -r --cached bin
+git rm -r --cached obj
