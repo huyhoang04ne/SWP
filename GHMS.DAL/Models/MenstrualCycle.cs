@@ -9,6 +9,7 @@ namespace GHMS.DAL.Models
     public class MenstrualCycle
     {
         public int Id { get; set; }
+        public virtual ICollection<MenstrualDay> DailyRecords { get; set; } = new List<MenstrualDay>();
         public string UserId { get; set; }               // FK to Users
         public DateTime CycleStartDate { get; set; }     // Start of period
         public int AverageLength { get; set; }           // Avg cycle length

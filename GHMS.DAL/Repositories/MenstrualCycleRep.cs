@@ -12,28 +12,53 @@ namespace GHMS.DAL.Repositories
     {
         public MenstrualCycleRep(GenderHealthContext context) : base(context) { }
 
-        // Custom DB queries for cycles
         /// <summary>
-        /// Get all cycles for a given user
+        /// Get all menstrual cycles of a specific user
         /// </summary>
+        /// <param name="userId">ID of the user</param>
+        /// <returns>IQueryable of cycles</returns>
         public IQueryable<MenstrualCycle> GetCyclesByUser(string userId)
-            => _dbSet.Where(c => c.UserId == userId);
+        {
+            return _dbSet.Where(c => c.UserId == userId)
+                         .OrderByDescending(c => c.CycleStartDate);
+        }
 
         /// <summary>
-        /// Get next ovulation date calculated for the latest cycle
+        /// Get the most recent cycle of a user
+        /// </summary>
+        public MenstrualCycle? GetLatestCycle(string userId)
+        {
+            return _dbSet.Where(c => c.UserId == userId)
+                         .OrderByDescending(c => c.CycleStartDate)
+                         .FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Calculate next ovulation date based on latest cycle
         /// </summary>
         public DateTime? GetNextOvulation(string userId)
         {
-            var latest = _dbSet
-                .Where(c => c.UserId == userId)
-                .OrderByDescending(c => c.CycleStartDate)
-                .FirstOrDefault();
-
+            var latest = GetLatestCycle(userId);
             if (latest == null)
                 return null;
 
             // Ovulation = start + (avgLength - 14)
             return latest.CycleStartDate.AddDays(latest.AverageLength - 14);
         }
-    }// Custom DB queries for cycles can go here
+
+        /// <summary>
+        /// Estimate fertile window (start = ovulation - 5, end = ovulation + 1)
+        /// </summary>
+        public (DateTime? Start, DateTime? End) GetFertilityWindow(string userId)
+        {
+            var ovulationDate = GetNextOvulation(userId);
+            if (ovulationDate == null)
+                return (null, null);
+
+            return (
+                Start: ovulationDate.Value.AddDays(-5),
+                End: ovulationDate.Value.AddDays(1)
+            );
+        }
+    }
 }

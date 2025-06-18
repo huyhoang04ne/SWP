@@ -1,55 +1,51 @@
-﻿using System;
+﻿using GHMS.Common.DAL;
+using GHMS.Common.Resp;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GHMS.Common.Resp;
-using GHMS.Common.DAL;
 
 namespace GHMS.Common.BLL
 {
-    public class GenericSvc<T> : IGenericSvc<T> where T : class
+    public class GenericSvc<TRep, T> : IGenericSvc<T>
+    where TRep : IGenericRep<T>
+    where T : class
     {
-        protected readonly IGenericRep<T> _repository;
-        public GenericSvc(IGenericRep<T> repository)
+        protected readonly TRep _rep;
+
+        public GenericSvc(TRep rep)
         {
-            _repository = repository;
+            _rep = rep;
         }
 
         public SingleRsp Get(int id)
         {
-            // Wrap repository read in response
-            return new SingleRsp { Data = _repository.Read(id) };
+            return new SingleRsp { Data = _rep.Read(id) };
         }
 
         public MultipleRsp List()
         {
-            // Return all entities in response
-            return new MultipleRsp { Data = _repository.All.ToList() };
+            return new MultipleRsp { Data = _rep.All.ToList() };
         }
 
         public SingleRsp Add(T entity)
         {
-            // Save and return created entity
-            _repository.Create(entity);
+            _rep.Create(entity);
             return new SingleRsp { Data = entity };
         }
 
         public SingleRsp Update(T entity)
         {
-            _repository.Update(entity);
+            _rep.Update(entity);
             return new SingleRsp { Data = entity };
         }
 
         public SingleRsp Delete(int id)
         {
-            var entity = _repository.Read(id);
+            var entity = _rep.Read(id);
             if (entity == null)
                 return new SingleRsp { Error = "Not found" };
 
-            _repository.Delete(entity);
+            _rep.Delete(entity);
             return new SingleRsp { Data = entity };
         }
     }
 }
-

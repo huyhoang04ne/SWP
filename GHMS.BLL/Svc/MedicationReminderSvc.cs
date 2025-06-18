@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GHMS.Common.BLL;
+﻿using GHMS.Common.BLL;
+using GHMS.Common.Req;
 using GHMS.Common.Resp;
 using GHMS.DAL.Models;
 using GHMS.DAL.Repositories;
@@ -11,15 +7,11 @@ using System;
 
 namespace GHMS.BLL.Svc
 {
-    public class MedicationReminderSvc : GenericSvc<MedicationReminder>
+    public class MedicationReminderSvc : GenericSvc<MedicationReminderRep, MedicationReminder>
     {
-        private readonly MedicationReminderRep _rep;
-        public MedicationReminderSvc(MedicationReminderRep rep) : base(rep)
-        {
-            _rep = rep;
-        }
+        public MedicationReminderSvc(MedicationReminderRep rep) : base(rep) { }
 
-        // Determine next reminder datetime
+        // Hàm tính thời gian nhắc tiếp theo
         public DateTime? Next(int id)
         {
             var res = Get(id);
@@ -30,7 +22,12 @@ namespace GHMS.BLL.Svc
             var today = now.Date.Add(mr.ReminderTime);
             if (today > now) return today;
 
-            return mr.Frequency.ToLower() == "daily" ? today.AddDays(1) : today.AddDays(7);
+            return mr.RegimenType switch
+            {
+                RegimenType.Pack21Days => today.AddDays(1),
+                RegimenType.Pack28Days => today.AddDays(1),
+                _ => null
+            };
         }
     }
 }
