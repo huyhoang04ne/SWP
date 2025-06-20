@@ -1,39 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GHMS.DAL.Models
 {
     public class MedicationReminder
     {
-        [Key]
-        public string Id { get; set; }
-
-        [Required]
-        [ForeignKey("User")]
-        public string UserId { get; set; }
-
-        [Required]
-        public TimeSpan ReminderTime { get; set; }
-
-        [Required]
-        [MaxLength(255)]
-        public string Frequency { get; set; } = "Daily";
-
-        [MaxLength(1000)]
-        public string? Message { get; set; }
-
-        public bool IsActive { get; set; } = true;
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
-
-        // Navigation property
-        public virtual AppUser User { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string? UserId { get; set; } // Cho phép null, vì có thể được gán sau
+        public DateTime ReminderTime { get; set; } // Đảm bảo được khởi tạo khi tạo
+        public string? MedicationName { get; set; } // Cho phép null, gán sau
+        public bool IsTaken { get; set; } = false; // Giá trị mặc định
+        public int PillCount { get; set; } // Đảm bảo được khởi tạo khi tạo
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public AppUser? User { get; set; } // Cho phép null, vì là navigation property
     }
 }

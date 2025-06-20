@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\GHMS.Web.props" />
-</Project>

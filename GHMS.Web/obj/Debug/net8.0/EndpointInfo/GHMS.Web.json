@@ -118,6 +118,92 @@
           }
         }
       }
+    },
+    "/api/Medication/set-reminder": {
+      "post": {
+        "tags": [
+          "Medication"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicationReminderCreateReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicationReminderCreateReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicationReminderCreateReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Menstrual/log": {
+      "post": {
+        "tags": [
+          "Menstrual"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenstrualCycleCreateReq"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenstrualCycleCreateReq"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MenstrualCycleCreateReq"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Menstrual/prediction": {
+      "get": {
+        "tags": [
+          "Menstrual"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Menstrual/logged-dates": {
+      "get": {
+        "tags": [
+          "Menstrual"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -137,6 +223,44 @@
           "password": {
             "minLength": 1,
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicationReminderCreateReq": {
+        "required": [
+          "pillType",
+          "reminderTime"
+        ],
+        "type": "object",
+        "properties": {
+          "reminderTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "pillType": {
+            "maximum": 28,
+            "minimum": 21,
+            "type": "integer",
+            "format": "int32"
+          },
+          "medicationName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MenstrualCycleCreateReq": {
+        "type": "object",
+        "properties": {
+          "periodDates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

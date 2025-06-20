@@ -1,39 +1,40 @@
-﻿using GHMS.Common.Config;
-using MailKit.Net.Smtp;
-using MailKit.Security;
-using Microsoft.Extensions.Configuration;
+﻿using System.Net;
+using System.Net.Mail;
+using GHMS.Common.Config;
 using Microsoft.Extensions.Options;
-using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GHMS.BLL.Services
 {
     public class EmailService
     {
-        private readonly SmtpSettings _settings;
+        private readonly SmtpSettings _smtpSettings;
 
-        public EmailService(IOptions<SmtpSettings> options)
+        public EmailService(IOptions<SmtpSettings> smtpSettings)
         {
-            _settings = options.Value;
+            _smtpSettings = smtpSettings.Value ?? throw new ArgumentNullException(nameof(smtpSettings));
         }
 
-        public async Task SendEmailAsync(string to, string subject, string html)
+        public async Task SendEmailAsync(string toEmail, string subject, string body)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("GHMS", _settings.User));
-            message.To.Add(MailboxAddress.Parse(to));
-            message.Subject = subject;
-            message.Body = new TextPart("html") { Text = html };
+            if (string.IsNullOrEmpty(_smtpSettings.Host) || string.IsNullOrEmpty(_smtpSettings.User) || string.IsNullOrEmpty(_smtpSettings.Password))
+                throw new InvalidOperationException("SMTP settings are incomplete.");
 
-            using var smtp = new MailKit.Net.Smtp.SmtpClient();
-            await smtp.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.SslOnConnect);
-            await smtp.AuthenticateAsync(_settings.User, _settings.Password);
-            await smtp.SendAsync(message);
-            await smtp.DisconnectAsync(true);
+            using var client = new SmtpClient(_smtpSettings.Host, _smtpSettings.Port)
+            {
+                EnableSsl = _smtpSettings.EnableSsl,
+                Credentials = new NetworkCredential(_smtpSettings.User, _smtpSettings.Password)
+            };
+
+            var mailMessage = new MailMessage
+            {
+                From = new MailAddress(_smtpSettings.User!),
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            };
+            mailMessage.To.Add(toEmail);
+
+            await client.SendMailAsync(mailMessage);
         }
     }
 }

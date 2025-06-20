@@ -8,10 +8,10 @@ namespace GHMS.Common.Config
 {
     public class SmtpSettings
     {
-        public string Host { get; set; } = null!;
-        public int Port { get; set; }
-        public bool EnableSsl { get; set; }
-        public string User { get; set; } = null!;
-        public string Password { get; set; } = null!;
+        public string? Host { get; set; } // Cho phép null, mặc định từ config
+        public int Port { get; set; } // Cần giá trị, nhưng sẽ được gán từ config
+        public bool EnableSsl { get; set; } = true; // Giá trị mặc định
+        public string? User { get; set; } // Cho phép null, gán từ config
+        public string? Password { get; set; } // Cho phép null, gán từ config
     }
 }

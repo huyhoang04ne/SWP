@@ -16,7 +16,7 @@ namespace GHMS.DAL.Models
 
         [Required]
         [ForeignKey("MenstrualCycle")]
-        public string CycleId { get; set; }
+        public int CycleId { get; set; }
 
         [Required]
         public DateTime Date { get; set; }

@@ -27,17 +27,53 @@ namespace GHMS.Web.Controllers
         public async Task<IActionResult> LogPeriod([FromBody] MenstrualCycleCreateReq req)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            await _service.AddPeriodEntryAsync(userId!, req);
-            return Ok(new { message = "Đã ghi nhận kỳ kinh." });
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized(new { message = "User not authenticated." });
+
+            try
+            {
+                await _service.AddPeriodEntryAsync(userId, req);
+                return Ok(new { message = "Đã ghi nhận kỳ kinh." });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi ghi nhận kỳ kinh.", error = ex.Message });
+            }
         }
 
-        [HttpGet("fertile-window")]
-        public async Task<IActionResult> GetFertileWindow()
+        [HttpGet("prediction")]
+        public async Task<IActionResult> GetPrediction()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result = await _service.GetFertileWindowAsync(userId!);
-            return result == null ? NotFound("Chưa đủ dữ liệu chu kỳ.") : Ok(result);
+            var fertile = await _service.GetFertileWindowAsync(userId!);
+            if (fertile == null)
+                return NotFound("Chưa đủ dữ liệu để dự đoán.");
+
+            var today = DateTime.UtcNow.Date;
+            var isInFertileWindow = today >= fertile.FertileStart && today <= fertile.FertileEnd;
+            var nextPeriod = fertile.OvulationDate.AddDays(14);
+
+            return Ok(new
+            {
+                OvulationDate = fertile.OvulationDate,
+                FertileStart = fertile.FertileStart,
+                FertileEnd = fertile.FertileEnd,
+                Status = isInFertileWindow ? "High" : "Low",
+                DaysUntilNextPeriod = (nextPeriod - today).Days,
+                NextPeriodDate = nextPeriod
+            });
+        }
+
+        [HttpGet("logged-dates")]
+        public async Task<IActionResult> GetLoggedDates()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var days = await _service.GetAllPeriodDatesAsync(userId!);
+            return Ok(days);
         }
     }
-
 }

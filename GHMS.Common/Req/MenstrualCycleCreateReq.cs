@@ -8,7 +8,6 @@ namespace GHMS.Common.Req
 {
     public class MenstrualCycleCreateReq
     {
-        public DateTime StartDate { get; set; }
-        public int PeriodLength { get; set; } // ví dụ: 5 ngày hành kinh
+        public List<DateTime> PeriodDates { get; set; } = new(); 
     }
 }
