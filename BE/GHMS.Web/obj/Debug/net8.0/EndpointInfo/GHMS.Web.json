@@ -150,6 +150,28 @@
         }
       }
     },
+    "/api/Medication/mark-as-taken/{id}": {
+      "post": {
+        "tags": [
+          "Medication"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Menstrual/log": {
       "post": {
         "tags": [

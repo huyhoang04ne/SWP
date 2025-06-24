@@ -112,6 +112,9 @@ namespace GHMS.DAL.Migrations
                     b.Property<bool>("IsTaken")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("LastEmailSentDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("MedicationName")
                         .HasColumnType("nvarchar(max)");
 

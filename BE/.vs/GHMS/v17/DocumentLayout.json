@@ -1,7 +1,32 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|c:\\users\\katana 15\\downloads\\swp\\be\\ghms.web\\controllers\\medicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\controllers\\medicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|c:\\users\\katana 15\\downloads\\swp\\be\\ghms.bll\\services\\medicationreminderbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\medicationreminderbackgroundservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|c:\\users\\katana 15\\downloads\\swp\\be\\ghms.bll\\services\\medicationreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\medicationreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8E30D53-94A8-4C65-973E-25C4022ACC10}|GHMS.DAL\\GHMS.DAL.csproj|c:\\users\\katana 15\\downloads\\swp\\be\\ghms.dal\\models\\medicationreminder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8E30D53-94A8-4C65-973E-25C4022ACC10}|GHMS.DAL\\GHMS.DAL.csproj|solutionrelative:ghms.dal\\models\\medicationreminder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8E30D53-94A8-4C65-973E-25C4022ACC10}|GHMS.DAL\\GHMS.DAL.csproj|c:\\users\\katana 15\\downloads\\swp\\be\\ghms.dal\\migrations\\ghmscontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8E30D53-94A8-4C65-973E-25C4022ACC10}|GHMS.DAL\\GHMS.DAL.csproj|solutionrelative:ghms.dal\\migrations\\ghmscontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8E30D53-94A8-4C65-973E-25C4022ACC10}|GHMS.DAL\\GHMS.DAL.csproj|c:\\users\\katana 15\\downloads\\swp\\be\\ghms.dal\\migrations\\20250621025549_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8E30D53-94A8-4C65-973E-25C4022ACC10}|GHMS.DAL\\GHMS.DAL.csproj|solutionrelative:ghms.dal\\migrations\\20250621025549_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 21,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,6 +115,83 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MedicationReminderService.cs",
+              "DocumentMoniker": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\Services\\MedicationReminderService.cs",
+              "RelativeDocumentMoniker": "GHMS.BLL\\Services\\MedicationReminderService.cs",
+              "ToolTip": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\Services\\MedicationReminderService.cs",
+              "RelativeToolTip": "GHMS.BLL\\Services\\MedicationReminderService.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAIwEgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:59:21.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MedicationController.cs",
+              "DocumentMoniker": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Web\\Controllers\\MedicationController.cs",
+              "RelativeDocumentMoniker": "GHMS.Web\\Controllers\\MedicationController.cs",
+              "ToolTip": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Web\\Controllers\\MedicationController.cs",
+              "RelativeToolTip": "GHMS.Web\\Controllers\\MedicationController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAcwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:55:41.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MedicationReminderBackgroundService.cs",
+              "DocumentMoniker": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\Services\\MedicationReminderBackgroundService.cs",
+              "RelativeDocumentMoniker": "GHMS.BLL\\Services\\MedicationReminderBackgroundService.cs",
+              "ToolTip": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\Services\\MedicationReminderBackgroundService.cs",
+              "RelativeToolTip": "GHMS.BLL\\Services\\MedicationReminderBackgroundService.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAUwEoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:53:51.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MedicationReminder.cs",
+              "DocumentMoniker": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\Models\\MedicationReminder.cs",
+              "RelativeDocumentMoniker": "GHMS.DAL\\Models\\MedicationReminder.cs",
+              "ToolTip": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\Models\\MedicationReminder.cs",
+              "RelativeToolTip": "GHMS.DAL\\Models\\MedicationReminder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:49:47.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20250621025549_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\Migrations\\20250621025549_InitialCreate.cs",
+              "RelativeDocumentMoniker": "GHMS.DAL\\Migrations\\20250621025549_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\Migrations\\20250621025549_InitialCreate.cs",
+              "RelativeToolTip": "GHMS.DAL\\Migrations\\20250621025549_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:39:24.001Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GHMSContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\Migrations\\GHMSContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "GHMS.DAL\\Migrations\\GHMSContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\Migrations\\GHMSContextModelSnapshot.cs",
+              "RelativeToolTip": "GHMS.DAL\\Migrations\\GHMSContextModelSnapshot.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T08:39:19.547Z",
+              "EditorCaption": ""
             }
           ]
         },
@@ -128,6 +230,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             }
           ]
         }

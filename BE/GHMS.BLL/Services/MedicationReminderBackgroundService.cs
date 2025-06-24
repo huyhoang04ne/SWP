@@ -37,13 +37,12 @@ namespace GHMS.BLL.Services
 
                     var now = DateTime.UtcNow;
                     var today = now.Date;
-                    var timeWindowEnd = now.AddMinutes(5); // Cửa sổ thời gian 5 phút để tránh bỏ sót
+                    var timeWindowEnd = now.AddMinutes(5);
 
                     var reminders = await context.MedicationReminders
-                        .Where(r => r.ReminderTime.Date == today
-                                 && r.ReminderTime >= now
-                                 && r.ReminderTime <= timeWindowEnd
-                                 && !r.IsTaken)
+                        .Where(r => r.ReminderTime.TimeOfDay >= now.TimeOfDay
+                                 && r.ReminderTime.TimeOfDay <= timeWindowEnd.TimeOfDay
+                                 && (r.LastEmailSentDate == null || r.LastEmailSentDate < today))
                         .ToListAsync(stoppingToken);
 
                     foreach (var reminder in reminders)
@@ -51,7 +50,7 @@ namespace GHMS.BLL.Services
                         try
                         {
                             await reminderService.SendReminderEmail(reminder);
-                            reminder.IsTaken = true; // Đánh dấu đã gửi/gửi thành công
+                            reminder.LastEmailSentDate = today;
                             reminder.UpdatedAt = DateTime.UtcNow;
                         }
                         catch (Exception ex)

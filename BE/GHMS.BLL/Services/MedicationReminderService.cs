@@ -57,5 +57,17 @@ namespace GHMS.BLL.Services
             _context.MedicationReminders.AddRange(reminders);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> MarkReminderAsTakenAsync(string reminderId)
+        {
+            var reminder = await _context.MedicationReminders.FindAsync(reminderId);
+            if (reminder == null) return false;
+
+            reminder.IsTaken = true;
+            reminder.UpdatedAt = DateTime.UtcNow;
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

@@ -21,3 +21,15 @@ D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\refint\GHMS.Common.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.pdb
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\ref\GHMS.Common.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\bin\Debug\net8.0\GHMS.Common.deps.json
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\bin\Debug\net8.0\GHMS.Common.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\bin\Debug\net8.0\GHMS.Common.pdb
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.AssemblyInfoInputs.cache
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.AssemblyInfo.cs
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.csproj.CoreCompileInputs.cache
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.sourcelink.json
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\refint\GHMS.Common.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.pdb
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.Common\obj\Debug\net8.0\ref\GHMS.Common.dll

@@ -1082,7 +1082,7 @@
         },
         "runtime": {
           "GHMS.BLL.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1090,7 +1090,7 @@
       "GHMS.Common/1.0.0": {
         "runtime": {
           "GHMS.Common.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1105,7 +1105,7 @@
         },
         "runtime": {
           "GHMS.DAL.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }

@@ -74,6 +74,22 @@
   },
   {
     "ContainingType": "GHMS.Web.Controllers.MedicationController",
+    "Method": "MarkAsTaken",
+    "RelativePath": "api/Medication/mark-as-taken/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.MedicationController",
     "Method": "SetReminder",
     "RelativePath": "api/Medication/set-reminder",
     "HttpMethod": "POST",

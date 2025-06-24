@@ -13,5 +13,7 @@ namespace GHMS.DAL.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         public AppUser? User { get; set; } // Cho phép null, navigation property
+
+        public DateTime? LastEmailSentDate { get; set; } // Ghi lại ngày cuối cùng đã gửi email
     }
 }
