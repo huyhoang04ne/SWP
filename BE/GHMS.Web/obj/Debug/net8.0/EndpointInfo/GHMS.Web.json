@@ -119,7 +119,7 @@
         }
       }
     },
-    "/api/Medication/set-reminder": {
+    "/api/Medication/set-schedule": {
       "post": {
         "tags": [
           "Medication"
@@ -128,21 +128,33 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MedicationReminderCreateReq"
+                "$ref": "#/components/schemas/SetScheduleReq"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/MedicationReminderCreateReq"
+                "$ref": "#/components/schemas/SetScheduleReq"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/MedicationReminderCreateReq"
+                "$ref": "#/components/schemas/SetScheduleReq"
               }
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Medication/upcoming-reminders": {
+      "get": {
+        "tags": [
+          "Medication"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -239,30 +251,6 @@
         },
         "additionalProperties": false
       },
-      "MedicationReminderCreateReq": {
-        "required": [
-          "pillType",
-          "reminderTime"
-        ],
-        "type": "object",
-        "properties": {
-          "reminderTime": {
-            "type": "string",
-            "format": "date-span"
-          },
-          "pillType": {
-            "maximum": 28,
-            "minimum": 21,
-            "type": "integer",
-            "format": "int32"
-          },
-          "medicationName": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "MenstrualCycleCreateReq": {
         "type": "object",
         "properties": {
@@ -309,6 +297,30 @@
             "maxLength": 100,
             "minLength": 6,
             "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SetScheduleReq": {
+        "type": "object",
+        "properties": {
+          "pillType": {
+            "maximum": 28,
+            "minimum": 21,
+            "type": "integer",
+            "format": "int32"
+          },
+          "reminderHour": {
+            "maximum": 23,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "reminderMinute": {
+            "maximum": 59,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

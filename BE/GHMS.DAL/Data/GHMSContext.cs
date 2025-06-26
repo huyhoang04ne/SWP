@@ -19,6 +19,9 @@ namespace GHMS.DAL.Data
         public DbSet<MenstrualPeriodDay> MenstrualPeriodDays { get; set; }
         public DbSet<MedicationReminder> MedicationReminders { get; set; }
 
+        public DbSet<MedicationSchedule> MedicationSchedules { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -41,6 +44,28 @@ namespace GHMS.DAL.Data
                 entity.HasOne(e => e.MenstrualCycle)
                       .WithMany(c => c.PeriodDays)
                       .HasForeignKey(e => e.CycleId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // 🆕 Cấu hình MedicationSchedule ↔ AppUser
+            modelBuilder.Entity<MedicationSchedule>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.HasOne(e => e.User)
+                      .WithMany() // nếu bạn muốn AppUser có nhiều schedule, thì `.WithMany(u => u.Schedules)`
+                      .HasForeignKey(e => e.UserId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // 🆕 Cấu hình MedicationReminder ↔ MedicationSchedule
+            modelBuilder.Entity<MedicationReminder>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.HasOne(e => e.Schedule)
+                      .WithMany(s => s.Reminders)
+                      .HasForeignKey(e => e.ScheduleId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
         }

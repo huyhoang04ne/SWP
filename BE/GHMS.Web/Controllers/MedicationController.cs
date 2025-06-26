@@ -1,9 +1,10 @@
 ﻿using GHMS.BLL.Services;
 using GHMS.Common.Req;
+using GHMS.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace GHMS.Web.Controllers
 {
@@ -12,22 +13,43 @@ namespace GHMS.Web.Controllers
     [Authorize]
     public class MedicationController : ControllerBase
     {
-        private readonly MedicationReminderService _reminderService;
+        private readonly MedicationReminderService _service;
+        private readonly UserManager<AppUser> _userManager;
 
-        public MedicationController(MedicationReminderService reminderService)
+        public MedicationController(MedicationReminderService service, UserManager<AppUser> userManager)
         {
-            _reminderService = reminderService;
+            _service = service;
+            _userManager = userManager;
         }
 
-        [HttpPost("set-reminder")]
-        public async Task<IActionResult> SetReminder([FromBody] MedicationReminderCreateReq request)
+        [HttpPost("set-schedule")]
+        public async Task<IActionResult> SetSchedule([FromBody] SetScheduleReq req)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized(new { message = "User not authenticated." });
 
-            await _reminderService.CreateMedicationRemindersAsync(request, userId);
-            return StatusCode(201, new { message = "Nhắc nhở thuốc đã được lưu thành công." });
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound(new { message = "Người dùng không tồn tại." });
+
+            await _service.SetOrUpdateScheduleAsync(req, userId);
+            return Ok(new { message = "Lịch uống thuốc đã được thiết lập." });
+        }
+
+        [HttpGet("upcoming-reminders")]
+        public async Task<IActionResult> GetUpcomingReminders()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var reminders = await _service.GetUpcomingRemindersAsync(userId);
+            return Ok(reminders.Select(r => new
+            {
+                r.ReminderTime,
+                r.IsTaken
+            }));
         }
     }
 }

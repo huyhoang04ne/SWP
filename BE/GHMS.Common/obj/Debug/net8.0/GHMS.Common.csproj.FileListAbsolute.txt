@@ -17,6 +17,7 @@ D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.GeneratedMSBuild
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.AssemblyInfoInputs.cache
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.AssemblyInfo.cs
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.csproj.CoreCompileInputs.cache
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.sourcelink.json
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\refint\GHMS.Common.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Common\obj\Debug\net8.0\GHMS.Common.pdb

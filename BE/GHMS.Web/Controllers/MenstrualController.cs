@@ -23,6 +23,9 @@ namespace GHMS.Web.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Ghi nhận hoặc cập nhật các ngày có kinh
+        /// </summary>
         [HttpPost("log")]
         public async Task<IActionResult> LogPeriod([FromBody] MenstrualCycleCreateReq req)
         {
@@ -45,17 +48,31 @@ namespace GHMS.Web.Controllers
             }
         }
 
+        /// <summary>
+        /// Trả về dự đoán kỳ rụng trứng, vùng màu mỡ và ngày hành kinh kế tiếp
+        /// </summary>
         [HttpGet("prediction")]
         public async Task<IActionResult> GetPrediction()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var fertile = await _service.GetFertileWindowAsync(userId!);
+
             if (fertile == null)
                 return NotFound("Chưa đủ dữ liệu để dự đoán.");
 
             var today = DateTime.UtcNow.Date;
             var isInFertileWindow = today >= fertile.FertileStart && today <= fertile.FertileEnd;
-            var nextPeriod = fertile.OvulationDate.AddDays(14);
+
+            var nextPeriod = fertile.OvulationDate.AddDays(14); // khoảng 14 ngày sau rụng trứng
+            var daysDiff = (today - nextPeriod).Days;
+
+            string periodStatus;
+            if (daysDiff == 0)
+                periodStatus = "Today";
+            else if (daysDiff < 0)
+                periodStatus = $"{Math.Abs(daysDiff)} days left";
+            else
+                periodStatus = $"{daysDiff} days late";
 
             return Ok(new
             {
@@ -63,11 +80,14 @@ namespace GHMS.Web.Controllers
                 FertileStart = fertile.FertileStart,
                 FertileEnd = fertile.FertileEnd,
                 Status = isInFertileWindow ? "High" : "Low",
-                DaysUntilNextPeriod = (nextPeriod - today).Days,
+                PeriodStatus = periodStatus,
                 NextPeriodDate = nextPeriod
             });
         }
 
+        /// <summary>
+        /// Trả về danh sách các ngày đã log hành kinh
+        /// </summary>
         [HttpGet("logged-dates")]
         public async Task<IActionResult> GetLoggedDates()
         {
@@ -76,6 +96,9 @@ namespace GHMS.Web.Controllers
             return Ok(days);
         }
 
+        /// <summary>
+        /// Trả về thông tin kỳ gần nhất bao gồm start date, period length, cycle length dự đoán
+        /// </summary>
         [HttpGet("current-cycle-prediction")]
         public async Task<IActionResult> GetCurrentCyclePrediction()
         {

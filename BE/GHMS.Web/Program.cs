@@ -8,18 +8,23 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Hangfire;
+using Hangfire.SqlServer;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add DB Context
+// 📦 1. Add DbContext
 builder.Services.AddDbContext<GHMSContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly("GHMS.DAL")));
 
-// Configure SmtpSettings
-builder.Services.Configure<GHMS.Common.Config.SmtpSettings>(builder.Configuration.GetSection("Smtp"));
+// 📧 2. Cấu hình Smtp, JWT, Google, Template
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+builder.Services.Configure<GoogleAuthSettings>(builder.Configuration.GetSection("GoogleAuth"));
+builder.Services.Configure<MailTemplateSettings>(builder.Configuration.GetSection("MailTemplate"));
 
-// Add Identity
+// 🔐 3. Identity
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedEmail = true;
@@ -27,14 +32,14 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 .AddEntityFrameworkStores<GHMSContext>()
 .AddDefaultTokenProviders();
 
-// Add Services
+// 🧠 4. Service DI
 builder.Services.AddScoped<AuthSvc>();
 builder.Services.AddScoped<EmailService>();
 builder.Services.AddScoped<MenstrualCycleService>();
 builder.Services.AddScoped<MedicationReminderService>();
-builder.Services.AddHostedService<MedicationReminderBackgroundService>();
 builder.Services.AddHostedService<DeleteUnverifiedUsersJob>();
 
+// 🌐 5. Controller + Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -64,7 +69,7 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// Add Authentication
+// 🔐 6. JWT Auth
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -85,7 +90,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Add CORS
+// 🔓 7. CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -96,20 +101,31 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Configure additional settings
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
-builder.Services.Configure<GoogleAuthSettings>(builder.Configuration.GetSection("GoogleAuth"));
-builder.Services.Configure<MailTemplateSettings>(builder.Configuration.GetSection("MailTemplate"));
+// 🔁 8. Hangfire setup (đặt ở đây cùng AddDbContext, AddScoped,...)
+builder.Services.AddHangfire(config =>
+    config.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddHangfireServer();
 
 var app = builder.Build();
 
-// Middleware
+// 🚦 9. Middleware
 app.UseCors("AllowAll");
 app.UseSwagger();
 app.UseSwaggerUI();
-//app.UseHttpsRedirection();//
+
+app.UseHangfireDashboard("/hangfire"); // Truy cập: http://localhost:{port}/hangfire
+
+// 🕘 10. Đăng ký job định kỳ nhắc nhở thuốc
+RecurringJob.AddOrUpdate<MedicationReminderService>(
+    "daily-pill-reminder",
+    svc => svc.SendDailyReminders(), // 🟡 Bạn cần định nghĩa hàm SendDailyReminders() trong MedicationReminderService
+    Cron.Daily(9),
+    TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time") // Giờ Việt Nam
+);
+
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-
 app.Run();

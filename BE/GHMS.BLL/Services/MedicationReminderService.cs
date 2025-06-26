@@ -1,60 +1,127 @@
 ﻿using GHMS.Common.Req;
 using GHMS.DAL.Data;
 using GHMS.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace GHMS.BLL.Services
 {
     public class MedicationReminderService
     {
-        private readonly EmailService _emailService;
         private readonly GHMSContext _context;
+        private readonly EmailService _emailService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public MedicationReminderService(EmailService emailService, GHMSContext context)
+        public MedicationReminderService(GHMSContext context, EmailService emailService, UserManager<AppUser> userManager)
         {
-            _emailService = emailService;
             _context = context;
+            _emailService = emailService;
+            _userManager = userManager;
         }
 
-        public async Task SendReminderEmail(MedicationReminder reminder)
+        public async Task SetOrUpdateScheduleAsync(SetScheduleReq req, string userId)
         {
-            var subject = "Nhắc nhở uống thuốc";
-            var body = $"Đây là thông báo nhắc nhở bạn uống thuốc {reminder.MedicationName} vào lúc {reminder.ReminderTime:HH:mm}. Hãy nhớ uống đúng giờ!";
-            await _emailService.SendEmailAsync(reminder.UserId, subject, body);
-        }
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                throw new ArgumentException("Người dùng không tồn tại.");
 
-        public async Task CreateMedicationRemindersAsync(MedicationReminderCreateReq request, string userId)
-        {
-            if (request.PillType != 21 && request.PillType != 28)
-                throw new ArgumentException("PillType must be 21 or 28.");
-            if (string.IsNullOrEmpty(userId))
-                throw new ArgumentException("UserId is required.");
+            var existing = await _context.MedicationSchedules
+                .Include(s => s.Reminders)
+                .FirstOrDefaultAsync(s => s.UserId == userId);
 
-            var numberOfDays = request.PillType;
-            var reminders = new List<MedicationReminder>();
-            var startDate = DateTime.UtcNow.Date;
-
-            for (int day = 0; day < numberOfDays; day++)
+            if (existing != null)
             {
-                var reminderDate = startDate.AddDays(day);
-                // Sửa lỗi: Sử dụng toán tử + để kết hợp DateTime với TimeSpan thay vì Add
-                var reminderTime = reminderDate + request.ReminderTime; // Tạo DateTime từ ngày + giờ
-                reminders.Add(new MedicationReminder
-                {
-                    UserId = userId,
-                    MedicationName = request.MedicationName,
-                    ReminderTime = reminderTime, // Đảm bảo gán DateTime vào DateTime
-                    PillCount = request.PillType,
-                    IsTaken = false,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
-                });
+                _context.MedicationReminders.RemoveRange(existing.Reminders);
+                _context.MedicationSchedules.Remove(existing);
+                await _context.SaveChangesAsync();
             }
 
-            _context.MedicationReminders.AddRange(reminders);
+            var schedule = new MedicationSchedule
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserId = userId,
+                PillType = req.PillType,
+                ReminderHour = req.ReminderHour,
+                ReminderMinute = req.ReminderMinute,
+                StartDate = DateTime.UtcNow.Date
+            };
+
+            var reminders = GenerateReminders(schedule);
+            schedule.Reminders = reminders;
+
+            _context.MedicationSchedules.Add(schedule);
+            await _context.SaveChangesAsync();
+        }
+
+        private List<MedicationReminder> GenerateReminders(MedicationSchedule schedule)
+        {
+            var list = new List<MedicationReminder>();
+            int totalDays = 28; // vỉ 21 vẫn tạo đủ 28 ngày
+
+            for (int i = 0; i < totalDays; i++)
+            {
+                var day = schedule.StartDate.AddDays(i);
+                bool isRealPill = schedule.PillType == 28 || i < 21;
+
+                if (isRealPill)
+                {
+                    var dateTime = new DateTime(
+                        day.Year, day.Month, day.Day,
+                        schedule.ReminderHour, schedule.ReminderMinute, 0);
+
+                    list.Add(new MedicationReminder
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        ScheduleId = schedule.Id,
+                        ReminderTime = dateTime,
+                        IsTaken = false,
+                        CreatedAt = DateTime.UtcNow,
+                        UpdatedAt = DateTime.UtcNow
+                    });
+                }
+            }
+
+            return list;
+        }
+
+        public async Task<List<MedicationReminder>> GetUpcomingRemindersAsync(string userId)
+        {
+            return await _context.MedicationReminders
+                .Where(r => r.Schedule.UserId == userId && r.ReminderTime >= DateTime.UtcNow)
+                .OrderBy(r => r.ReminderTime)
+                .Take(10)
+                .ToListAsync();
+        }
+
+        public async Task SendDailyReminders()
+        {
+            var now = DateTime.UtcNow;
+            var today = now.Date;
+
+            var reminders = await _context.MedicationReminders
+                .Include(r => r.Schedule)
+                .ThenInclude(s => s.User)
+                .Where(r =>
+                    r.ReminderTime.Date == today &&
+                    r.ReminderTime.Hour == now.Hour &&
+                    !r.IsTaken)
+                .ToListAsync();
+
+            foreach (var reminder in reminders)
+            {
+                if (reminder.Schedule?.User?.Email != null)
+                {
+                    var email = reminder.Schedule.User.Email;
+                    var subject = "Nhắc nhở uống thuốc";
+                    var body = $"Bạn cần uống thuốc vào lúc {reminder.ReminderTime:HH:mm} hôm nay.";
+
+                    await _emailService.SendEmailAsync(email, subject, body);
+
+                    reminder.IsTaken = true;
+                    reminder.UpdatedAt = DateTime.UtcNow;
+                }
+            }
+
             await _context.SaveChangesAsync();
         }
     }

@@ -12,7 +12,7 @@ namespace GHMS.DAL.Models
         public string FullName { get; set; } = default!;
         public string Gender { get; set; } = default!;
         public DateTime DateOfBirth { get; set; }
-
+        public ICollection<MedicationSchedule> Schedules { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

@@ -168,6 +168,10 @@ D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\GHMS.Web.pdb
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Azure.Core.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Azure.Identity.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Hangfire.AspNetCore.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Hangfire.Core.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Hangfire.NetCore.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Hangfire.SqlServer.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Humanizer.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\MailKit.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
@@ -205,6 +209,7 @@ D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\MimeKit.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Mono.TextTemplating.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -225,6 +230,20 @@ D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\System.Security.Permissions.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\System.Text.Json.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\ca\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\de\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\es\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\fa\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\fr\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\nb\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\nl\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\pt-BR\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\pt-PT\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\pt\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\sv\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\tr-TR\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\zh-TW\Hangfire.Core.resources.dll
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\zh\Hangfire.Core.resources.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -303,6 +322,7 @@ D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\GHMS.Web.AssemblyInfo.cs
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\GHMS.Web.csproj.CoreCompileInputs.cache
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\GHMS.Web.MvcApplicationPartsAssemblyInfo.cs
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\GHMS.Web.MvcApplicationPartsAssemblyInfo.cache
+D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\GHMS.Web.sourcelink.json
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\staticwebassets.build.json
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\staticwebassets.development.json
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.Web\obj\Debug\net8.0\staticwebassets\msbuild.GHMS.Web.Microsoft.AspNetCore.StaticWebAssets.props

@@ -74,18 +74,28 @@
   },
   {
     "ContainingType": "GHMS.Web.Controllers.MedicationController",
-    "Method": "SetReminder",
-    "RelativePath": "api/Medication/set-reminder",
+    "Method": "SetSchedule",
+    "RelativePath": "api/Medication/set-schedule",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "GHMS.Common.Req.MedicationReminderCreateReq",
+        "Name": "req",
+        "Type": "GHMS.Common.Req.SetScheduleReq",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.MedicationController",
+    "Method": "GetUpcomingReminders",
+    "RelativePath": "api/Medication/upcoming-reminders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
