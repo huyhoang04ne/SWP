@@ -59,8 +59,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-24T15:22:17.561Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -165,8 +164,7 @@
               "RelativeToolTip": "GHMS.BLL\\Services\\AutoRenewMedicationReminderService.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAqwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T16:05:45.426Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T16:05:45.426Z"
             },
             {
               "$type": "Document",
@@ -178,8 +176,7 @@
               "RelativeToolTip": "GHMS.Web\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAHcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T15:33:14.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T15:33:14.096Z"
             },
             {
               "$type": "Document",
@@ -215,8 +212,7 @@
               "RelativeToolTip": "GHMS.DAL\\Data\\GHMSContext.cs",
               "ViewState": "AgIAADcAAAAAAAAAAAAAAFcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T15:25:01.731Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T15:25:01.731Z"
             },
             {
               "$type": "Document",
@@ -240,8 +236,7 @@
               "RelativeToolTip": "GHMS.DAL\\Models\\MedicationSchedule.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAAwCAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T15:22:42.808Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T15:22:42.808Z"
             }
           ]
         },
