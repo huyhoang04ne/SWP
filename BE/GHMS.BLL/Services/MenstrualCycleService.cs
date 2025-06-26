@@ -22,45 +22,52 @@ namespace GHMS.BLL.Services
         {
             var currentDate = DateTime.UtcNow.AddHours(7).Date;
 
+            // Kiểm tra ngày trong tương lai
             var futureDates = req.PeriodDates.Where(d => d.Date > currentDate).ToList();
             if (futureDates.Any())
             {
                 throw new ArgumentException($"Không được phép nhập ngày trong tương lai. Các ngày không hợp lệ: {string.Join(", ", futureDates.Select(d => d.ToString("dd/MM/yyyy")))}");
             }
 
-            var existingDays = await _context.MenstrualPeriodDays
-                .Where(x => x.MenstrualCycle.UserId == userId)
-                .Include(x => x.MenstrualCycle)
+            // Gom nhóm các ngày liên tiếp được chọn
+            var groups = GroupConsecutivePeriodDays(req.PeriodDates.Select(d => d.Date).ToList());
+            var newStartDates = groups.Select(g => g.First().Date).ToHashSet();
+
+            // Lấy toàn bộ các kỳ cũ của người dùng
+            var oldCycles = await _context.MenstrualCycles
+                .Where(x => x.UserId == userId)
+                .Include(x => x.PeriodDays)
                 .ToListAsync();
 
-            var toRemove = existingDays.Where(x => !req.PeriodDates.Contains(x.Date.Date)).ToList();
-            _context.MenstrualPeriodDays.RemoveRange(toRemove);
+            // Xóa các kỳ không còn ngày bắt đầu trong danh sách mới
+            var cyclesToDelete = oldCycles.Where(c => !newStartDates.Contains(c.StartDate.Date)).ToList();
+            foreach (var cycle in cyclesToDelete)
+            {
+                _context.MenstrualPeriodDays.RemoveRange(cycle.PeriodDays);
+                _context.MenstrualCycles.Remove(cycle);
+            }
 
-            var existingDatesSet = existingDays.Select(x => x.Date.Date).ToHashSet();
-            var newDates = req.PeriodDates.Select(d => d.Date).Except(existingDatesSet).ToList();
+            await _context.SaveChangesAsync();
 
-            var groups = GroupConsecutivePeriodDays(newDates);
-
+            // Thêm các kỳ mới
             foreach (var group in groups)
             {
                 var start = group.First();
 
-                var cycle = await _context.MenstrualCycles
-                    .FirstOrDefaultAsync(x => x.UserId == userId && x.StartDate.Date == start);
+                // Tránh tạo trùng nếu kỳ này đã tồn tại
+                var existingCycle = oldCycles.FirstOrDefault(c => c.StartDate.Date == start.Date);
+                if (existingCycle != null) continue;
 
-                if (cycle == null)
+                var cycle = new MenstrualCycle
                 {
-                    cycle = new MenstrualCycle
-                    {
-                        UserId = userId,
-                        StartDate = start,
-                        PeriodLength = group.Count,
-                        CycleLength = 0
-                    };
+                    UserId = userId,
+                    StartDate = start,
+                    PeriodLength = group.Count,
+                    CycleLength = 0 // sẽ tính sau
+                };
 
-                    _context.MenstrualCycles.Add(cycle);
-                    await _context.SaveChangesAsync();
-                }
+                _context.MenstrualCycles.Add(cycle);
+                await _context.SaveChangesAsync(); // để lấy cycle.Id
 
                 foreach (var date in group)
                 {
@@ -74,8 +81,12 @@ namespace GHMS.BLL.Services
                 }
             }
 
+            await _context.SaveChangesAsync();
+
+            // Cập nhật độ dài chu kỳ
             await UpdateCycleLengthsAsync(userId);
         }
+
 
         private async Task UpdateCycleLengthsAsync(string userId)
         {
@@ -92,14 +103,14 @@ namespace GHMS.BLL.Services
                 }
                 else
                 {
-                    var cycleGaps = new List<int>();
-                    for (int j = i - 1; j >= 1 && cycleGaps.Count < 5; j--)
+                    var gaps = new List<int>();
+                    for (int j = i - 1; j >= 1 && gaps.Count < 5; j--)
                     {
                         var gap = (userCycles[j].StartDate - userCycles[j - 1].StartDate).Days;
-                        cycleGaps.Add(gap);
+                        gaps.Add(gap);
                     }
 
-                    userCycles[i].CycleLength = cycleGaps.Any() ? (int)Math.Round(cycleGaps.Average()) : 28;
+                    userCycles[i].CycleLength = gaps.Any() ? (int)Math.Round(gaps.Average()) : 28;
                 }
 
                 _context.MenstrualCycles.Update(userCycles[i]);
@@ -126,9 +137,7 @@ namespace GHMS.BLL.Services
                 }
             }
 
-            if (group.Any())
-                result.Add(group);
-
+            if (group.Any()) result.Add(group);
             return result;
         }
 
@@ -139,23 +148,21 @@ namespace GHMS.BLL.Services
                 .OrderBy(x => x.StartDate)
                 .ToListAsync();
 
-            if (!cycles.Any())
-                return null;
+            if (!cycles.Any()) return null;
 
             var latest = cycles.Last();
-
             int predictedLength = latest.CycleLength;
+
             if (predictedLength == 0 || cycles.Count == 1)
             {
-                var previous5 = cycles
-                    .Take(cycles.Count - 1)
+                var recent = cycles.Take(cycles.Count - 1)
                     .Reverse()
                     .Where(x => x.CycleLength > 0)
                     .Take(5)
                     .Select(x => x.CycleLength)
                     .ToList();
 
-                predictedLength = previous5.Any() ? (int)Math.Round(previous5.Average()) : 28;
+                predictedLength = recent.Any() ? (int)Math.Round(recent.Average()) : 28;
             }
 
             return new
@@ -174,11 +181,11 @@ namespace GHMS.BLL.Services
                 .OrderByDescending(x => x.StartDate)
                 .ToListAsync();
 
-            if (cycles.Count == 0) return null;
+            if (!cycles.Any()) return null;
 
             var latest = cycles.First();
-
             int cycleLength = latest.CycleLength;
+
             if (cycleLength == 0 || cycles.Count == 1)
             {
                 var gaps = new List<int>();
@@ -210,18 +217,6 @@ namespace GHMS.BLL.Services
                 .Select(x => x.Date.Date)
                 .Distinct()
                 .ToListAsync();
-        }
-
-        private async Task<int> CalculatePredictedCycleLengthAsync(string userId)
-        {
-            var recentCycles = await _context.MenstrualCycles
-                .Where(x => x.UserId == userId && x.CycleLength > 0)
-                .OrderByDescending(x => x.StartDate)
-                .Take(5)
-                .Select(x => x.CycleLength)
-                .ToListAsync();
-
-            return recentCycles.Any() ? (int)Math.Round(recentCycles.Average()) : 28;
         }
     }
 }

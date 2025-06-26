@@ -18,5 +18,7 @@ namespace GHMS.DAL.Models
         public int PeriodLength { get; set; }
 
         public virtual ICollection<MenstrualPeriodDay> PeriodDays { get; set; } = new List<MenstrualPeriodDay>();
+
+
     }
 }
