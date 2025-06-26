@@ -2,13 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import banner1 from '../../assets/gender_care_clinic_hero.jpg';
 import Header from '../../components/header';
-import Navbar from '../../components/navbar';
+// ❌ Đã xoá: import Navbar
 import Footer from '../../components/Footer';
+
 const HomePage: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col">
-      <Header/>
-      <Navbar/>
+      <Header />
+      {/* ❌ Đã xoá: <Navbar /> */}
+
       <section className="bg-gradient-to-r from-purple-100 via-pink-50 to-green-100 py-14">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 items-center gap-10">
           <div className="space-y-6">
@@ -32,6 +34,7 @@ const HomePage: React.FC = () => {
           />
         </div>
       </section>
+
       <main className="flex-grow max-w-7xl mx-auto p-6 space-y-10">
         <h2 className="text-2xl font-bold text-purple-700 text-center">Bài viết nổi bật</h2>
         <div className="grid md:grid-cols-3 gap-6">
@@ -54,7 +57,8 @@ const HomePage: React.FC = () => {
           ))}
         </div>
       </main>
-      <Footer/>
+
+      <Footer />
       <div className="flex justify-center py-4">
         <a href="#top" className="text-purple-600 hover:underline">
           ↑ Back to top
