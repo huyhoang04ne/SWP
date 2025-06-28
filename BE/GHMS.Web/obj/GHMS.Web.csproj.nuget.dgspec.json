@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\GHMS.Web.csproj": {}
+    "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Web\\GHMS.Web.csproj": {}
   },
   "projects": {
-    "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj": {
+    "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\GHMS.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
+        "projectUniqueName": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
         "projectName": "GHMS.BLL",
-        "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\obj\\",
+        "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
+        "packagesPath": "C:\\Users\\KATANA 15\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Bao\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\KATANA 15\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,11 +32,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\GHMS.Common.csproj": {
-                "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\GHMS.Common.csproj"
+              "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\GHMS.Common.csproj": {
+                "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\GHMS.Common.csproj"
               },
-              "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\GHMS.DAL.csproj": {
-                "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\GHMS.DAL.csproj"
+              "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\GHMS.DAL.csproj": {
+                "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\GHMS.DAL.csproj"
               }
             }
           }
@@ -50,7 +50,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -102,29 +103,43 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\GHMS.Common.csproj": {
+    "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\GHMS.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\GHMS.Common.csproj",
+        "projectUniqueName": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\GHMS.Common.csproj",
         "projectName": "GHMS.Common",
-        "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\GHMS.Common.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\obj\\",
+        "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\GHMS.Common.csproj",
+        "packagesPath": "C:\\Users\\KATANA 15\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Bao\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\KATANA 15\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -150,7 +165,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -166,29 +182,43 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\GHMS.DAL.csproj": {
+    "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\GHMS.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\GHMS.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\GHMS.DAL.csproj",
         "projectName": "GHMS.DAL",
-        "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\GHMS.DAL.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\obj\\",
+        "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\GHMS.DAL.csproj",
+        "packagesPath": "C:\\Users\\KATANA 15\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Bao\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\KATANA 15\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -203,8 +233,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\GHMS.Common.csproj": {
-                "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\GHMS.Common.csproj"
+              "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\GHMS.Common.csproj": {
+                "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Common\\GHMS.Common.csproj"
               }
             }
           }
@@ -218,7 +248,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -264,29 +295,43 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\GHMS.Web.csproj": {
+    "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Web\\GHMS.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\GHMS.Web.csproj",
+        "projectUniqueName": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Web\\GHMS.Web.csproj",
         "projectName": "GHMS.Web",
-        "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\GHMS.Web.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\obj\\",
+        "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Web\\GHMS.Web.csproj",
+        "packagesPath": "C:\\Users\\KATANA 15\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.Web\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Bao\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\KATANA 15\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -301,8 +346,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj": {
-                "projectPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj"
+              "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\GHMS.BLL.csproj": {
+                "projectPath": "C:\\Users\\KATANA 15\\Downloads\\SWP\\BE\\GHMS.BLL\\GHMS.BLL.csproj"
               }
             }
           }
@@ -316,7 +361,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -368,6 +414,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.17, 8.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -376,7 +440,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.411/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -34,3 +34,21 @@ D:\Bao\SWP\SWP\GHMS\BE\GHMS.DAL\obj\Debug\net8.0\refint\GHMS.DAL.dll
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.pdb
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.genruntimeconfig.cache
 D:\Bao\SWP\SWP\GHMS\BE\GHMS.DAL\obj\Debug\net8.0\ref\GHMS.DAL.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\bin\Debug\net8.0\GHMS.DAL.deps.json
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\bin\Debug\net8.0\GHMS.DAL.runtimeconfig.json
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\bin\Debug\net8.0\GHMS.DAL.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\bin\Debug\net8.0\GHMS.DAL.pdb
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\bin\Debug\net8.0\GHMS.Common.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\bin\Debug\net8.0\GHMS.Common.pdb
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.csproj.AssemblyReference.cache
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.AssemblyInfoInputs.cache
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.AssemblyInfo.cs
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.csproj.CoreCompileInputs.cache
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.sourcelink.json
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.csproj.Up2Date
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\refint\GHMS.DAL.dll
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.pdb
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\GHMS.DAL.genruntimeconfig.cache
+C:\Users\KATANA 15\Downloads\SWP\BE\GHMS.DAL\obj\Debug\net8.0\ref\GHMS.DAL.dll

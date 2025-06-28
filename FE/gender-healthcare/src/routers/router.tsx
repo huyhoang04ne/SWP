@@ -1,49 +1,51 @@
 import { createBrowserRouter } from "react-router-dom";
-import HomeScreen from "../pages/Home/HomeScreen";
-import LoginPage from "../pages/Login/Login";
-import RegisterPage from "../pages/Register/Register";  
+import HomePage from "../pages/Home/HomePage";
+import ModernLogin from "../pages/Login/ModernLogin";
+import RegisterPage from "../pages/Register/Register";
 import CycleTracking from "../pages/CycleTracking/CycleTracking";
 import PeriodCalendarPage from "../pages/PeriodCalendar/PeriodCalendarPage";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import CycleSummary from "../pages/CycleTracking/CycleSummary";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 const routers = createBrowserRouter([
   {
     path: "/",
-    element: <HomeScreen />,
+    element: <HomePage />, // dùng HomePage làm layout luôn
+    children: [
+      {
+        path: "cycle-tracking",
+        element: (
+          <ProtectedRoute>
+            <CycleTracking />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "period-calendar",
+        element: (
+          <ProtectedRoute>
+            <PeriodCalendarPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "cycle-summary",
+        element: (
+          <ProtectedRoute>
+            <CycleSummary />
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
   {
     path: "/login",
-    element: <LoginPage />,
+    element: <ModernLogin />,
   },
   {
     path: "/register",
     element: <RegisterPage />,
   },
-  {
-    path: "/cycle-tracking",
-    element: (
-      <ProtectedRoute>
-        <CycleTracking />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/period-calendar",
-    element: (
-      <ProtectedRoute>
-        <PeriodCalendarPage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <ProtectedRoute>
-        <Dashboard />
-      </ProtectedRoute>
-    ),
-  }
 ]);
 
 export default routers;
