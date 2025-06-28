@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../components/Layout";
 import HomePage from "../pages/Home/HomePage";
 import ModernLogin from "../pages/Login/ModernLogin";
 import RegisterPage from "../pages/Register/Register";
@@ -11,12 +10,8 @@ import ProtectedRoute from "../components/ProtectedRoute";
 const routers = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <HomePage />, // dùng HomePage làm layout luôn
     children: [
-      {
-        index: true,
-        element: <HomePage />,
-      },
       {
         path: "cycle-tracking",
         element: (
