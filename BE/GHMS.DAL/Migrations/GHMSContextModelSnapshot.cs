@@ -22,7 +22,7 @@ namespace GHMS.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("GHMS.DAL.Models.AppUser", b =>
+            modelBuilder.Entity("AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -115,9 +115,8 @@ namespace GHMS.DAL.Migrations
                     b.Property<DateTime>("ReminderTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ScheduleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -131,11 +130,17 @@ namespace GHMS.DAL.Migrations
 
             modelBuilder.Entity("GHMS.DAL.Models.MedicationSchedule", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PillType")
                         .HasColumnType("int");
@@ -358,11 +363,11 @@ namespace GHMS.DAL.Migrations
 
             modelBuilder.Entity("GHMS.DAL.Models.MedicationSchedule", b =>
                 {
-                    b.HasOne("GHMS.DAL.Models.AppUser", null)
-                        .WithMany("Schedules")
+                    b.HasOne("AppUser", null)
+                        .WithMany("MedicationSchedules")
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("GHMS.DAL.Models.AppUser", "User")
+                    b.HasOne("AppUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -393,7 +398,7 @@ namespace GHMS.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("GHMS.DAL.Models.AppUser", null)
+                    b.HasOne("AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -402,7 +407,7 @@ namespace GHMS.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("GHMS.DAL.Models.AppUser", null)
+                    b.HasOne("AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -417,7 +422,7 @@ namespace GHMS.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GHMS.DAL.Models.AppUser", null)
+                    b.HasOne("AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -426,16 +431,16 @@ namespace GHMS.DAL.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("GHMS.DAL.Models.AppUser", null)
+                    b.HasOne("AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GHMS.DAL.Models.AppUser", b =>
+            modelBuilder.Entity("AppUser", b =>
                 {
-                    b.Navigation("Schedules");
+                    b.Navigation("MedicationSchedules");
                 });
 
             modelBuilder.Entity("GHMS.DAL.Models.MedicationSchedule", b =>

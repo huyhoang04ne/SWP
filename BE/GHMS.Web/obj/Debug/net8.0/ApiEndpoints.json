@@ -74,8 +74,18 @@
   },
   {
     "ContainingType": "GHMS.Web.Controllers.MedicationController",
+    "Method": "GetCurrentSchedule",
+    "RelativePath": "api/Medication/current-schedule",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.MedicationController",
     "Method": "SetSchedule",
-    "RelativePath": "api/Medication/set-schedule",
+    "RelativePath": "api/Medication/schedule",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -86,16 +96,6 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "GHMS.Web.Controllers.MedicationController",
-    "Method": "GetUpcomingReminders",
-    "RelativePath": "api/Medication/upcoming-reminders",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {

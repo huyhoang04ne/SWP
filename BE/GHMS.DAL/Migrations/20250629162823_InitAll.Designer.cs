@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GHMS.DAL.Migrations
 {
     [DbContext(typeof(GHMSContext))]
-    [Migration("20250624154621_AddMedicationPillReminder")]
-    partial class AddMedicationPillReminder
+    [Migration("20250629162823_InitAll")]
+    partial class InitAll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,9 +118,8 @@ namespace GHMS.DAL.Migrations
                     b.Property<DateTime>("ReminderTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ScheduleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -134,11 +133,17 @@ namespace GHMS.DAL.Migrations
 
             modelBuilder.Entity("GHMS.DAL.Models.MedicationSchedule", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("PillType")
                         .HasColumnType("int");
@@ -365,13 +370,11 @@ namespace GHMS.DAL.Migrations
                         .WithMany("Schedules")
                         .HasForeignKey("AppUserId");
 
-                    b.HasOne("GHMS.DAL.Models.AppUser", "User")
+                    b.HasOne("GHMS.DAL.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GHMS.DAL.Models.MenstrualPeriodDay", b =>

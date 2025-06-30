@@ -2,54 +2,63 @@
 using GHMS.Common.Req;
 using GHMS.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace GHMS.Web.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class MedicationController : ControllerBase
     {
         private readonly MedicationReminderService _service;
-        private readonly UserManager<AppUser> _userManager;
 
-        public MedicationController(MedicationReminderService service, UserManager<AppUser> userManager)
+        public MedicationController(MedicationReminderService service)
         {
             _service = service;
-            _userManager = userManager;
         }
 
-        [HttpPost("set-schedule")]
+        /// <summary>
+        /// Ghi nhận hoặc cập nhật lịch nhắc thuốc
+        /// </summary>
+        [HttpPost("schedule")]
         public async Task<IActionResult> SetSchedule([FromBody] SetScheduleReq req)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
-                return Unauthorized(new { message = "User not authenticated." });
+                return Unauthorized("User not authenticated.");
 
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-                return NotFound(new { message = "Người dùng không tồn tại." });
-
-            await _service.SetOrUpdateScheduleAsync(req, userId);
-            return Ok(new { message = "Lịch uống thuốc đã được thiết lập." });
+            try
+            {
+                await _service.SetOrUpdateScheduleSmartAsync(userId, req);
+                return Ok(new { message = "Đã lưu lịch nhắc thuốc." });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Đã xảy ra lỗi khi lưu lịch nhắc thuốc.", error = ex.Message });
+            }
         }
 
-        [HttpGet("upcoming-reminders")]
-        public async Task<IActionResult> GetUpcomingReminders()
+        /// <summary>
+        /// (Tuỳ chọn) Lấy thông tin lịch nhắc hiện tại
+        /// </summary>
+        [HttpGet("current-schedule")]
+        public async Task<IActionResult> GetCurrentSchedule()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
-                return Unauthorized();
+                return Unauthorized("User not authenticated.");
 
-            var reminders = await _service.GetUpcomingRemindersAsync(userId);
-            return Ok(reminders.Select(r => new
-            {
-                r.ReminderTime,
-                r.IsTaken
-            }));
+            var schedule = await _service.GetCurrentScheduleAsync(userId);
+            if (schedule == null)
+                return NotFound("Chưa có lịch nhắc thuốc.");
+
+            return Ok(schedule);
         }
     }
 }

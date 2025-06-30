@@ -127,12 +127,12 @@ namespace GHMS.BLL.Services
 
         private async Task<string> GenerateJwtToken(AppUser user)
         {
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+            var claims = new List<Claim>
+{
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName ?? "")
+                // 👇 CHỈNH LẠI dòng dưới
+                new Claim(ClaimTypes.NameIdentifier, user.Id), // Đúng!
+                new Claim(ClaimTypes.Name, user.Email)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
@@ -140,12 +140,12 @@ namespace GHMS.BLL.Services
             var expires = DateTime.UtcNow.AddDays(7);
 
             var token = new JwtSecurityToken(
-                issuer: _jwtSettings.Issuer,
-                audience: _jwtSettings.Audience,
-                claims: claims,
-                expires: expires,
-                signingCredentials: creds
-            );
+            issuer: _jwtSettings.Issuer,
+            audience: _jwtSettings.Audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddMinutes(30),
+            signingCredentials: creds
+        );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

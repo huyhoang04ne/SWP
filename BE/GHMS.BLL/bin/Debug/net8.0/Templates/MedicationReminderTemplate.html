@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #eef2f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 100px;
+    }
+    .note {
+      color: #666;
+      font-size: 14px;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">
+      <img src="https://i.imgur.com/O0DCcQy.png" alt="GHMS Logo">
+    </div>
+    <h2>👋 Xin chào {{fullName}},</h2>
+    <p>Đây là lời nhắc uống thuốc của bạn hôm nay từ hệ thống GHMS.</p>
+    <p>
+      📆 Hôm nay là <strong>ngày {{currentDay}}/{{pillTotal}}{{note}}</strong> trong vỉ thuốc của bạn.<br>
+      ⏰ Hãy uống thuốc vào lúc <strong>{{reminderTime}}</strong>.
+    </p>
+
+    {{lastDayNote}}
+
+    <p class="note">
+      Nếu bạn cần hỗ trợ, đừng ngần ngại liên hệ đội ngũ chăm sóc khách hàng của GHMS.
+    </p>
+
+    <div class="footer">
+      Đây là email tự động từ hệ thống GHMS. Vui lòng không trả lời trực tiếp email này.
+    </div>
+  </div>
+</body>
+</html>

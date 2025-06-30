@@ -8,25 +8,22 @@ namespace GHMS.DAL.Models
     public class MedicationSchedule
     {
         [Key]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public int Id { get; set; }
 
         [Required]
-        public string UserId { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; } = default!;
 
-        [Range(21, 28)]
-        public int PillType { get; set; } // 21 hoặc 28 viên
+        public DateTime StartDate { get; set; }
+        public PillType PillType { get; set; }
 
-        [Range(0, 23)]
         public int ReminderHour { get; set; }
-
-        [Range(0, 59)]
         public int ReminderMinute { get; set; }
 
-        public DateTime StartDate { get; set; } = DateTime.UtcNow.Date;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        [ForeignKey("UserId")]
-        public AppUser User { get; set; }
-
+        // Navigation properties
+        public virtual AppUser User { get; set; } = default!; // Gắn đúng quan hệ với AspNetUsers
         public virtual ICollection<MedicationReminder> Reminders { get; set; } = new List<MedicationReminder>();
     }
 }

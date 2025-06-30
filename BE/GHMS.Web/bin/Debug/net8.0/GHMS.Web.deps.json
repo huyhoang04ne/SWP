@@ -9,6 +9,7 @@
       "GHMS.Web/1.0.0": {
         "dependencies": {
           "GHMS.BLL": "1.0.0",
+          "GHMS.Common": "1.0.0",
           "Hangfire": "1.8.20",
           "Hangfire.SqlServer": "1.8.20",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
@@ -1198,22 +1199,24 @@
         },
         "runtime": {
           "GHMS.BLL.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
       "GHMS.Common/1.0.0": {
+        "dependencies": {
+          "GHMS.DAL": "1.0.0"
+        },
         "runtime": {
           "GHMS.Common.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
       "GHMS.DAL/1.0.0": {
         "dependencies": {
-          "GHMS.Common": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0",
           "Microsoft.Extensions.Configuration": "9.0.6",
@@ -1221,7 +1224,7 @@
         },
         "runtime": {
           "GHMS.DAL.dll": {
-            "assemblyVersion": "1.0.0.0",
+            "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }

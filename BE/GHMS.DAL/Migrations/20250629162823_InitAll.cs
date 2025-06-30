@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GHMS.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitAll : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -177,26 +177,33 @@ namespace GHMS.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicationReminders",
+                name: "MedicationSchedules",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ReminderTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MedicationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsTaken = table.Column<bool>(type: "bit", nullable: false),
-                    PillCount = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PillType = table.Column<int>(type: "int", nullable: false),
+                    ReminderHour = table.Column<int>(type: "int", nullable: false),
+                    ReminderMinute = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicationReminders", x => x.Id);
+                    table.PrimaryKey("PK_MedicationSchedules", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MedicationReminders_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_MedicationSchedules_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MedicationSchedules_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -216,6 +223,28 @@ namespace GHMS.DAL.Migrations
                         name: "FK_MenstrualPeriodDays_MenstrualCycles_CycleId",
                         column: x => x.CycleId,
                         principalTable: "MenstrualCycles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MedicationReminders",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ScheduleId = table.Column<int>(type: "int", nullable: false),
+                    ReminderTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsTaken = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicationReminders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MedicationReminders_MedicationSchedules_ScheduleId",
+                        column: x => x.ScheduleId,
+                        principalTable: "MedicationSchedules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -260,8 +289,18 @@ namespace GHMS.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicationReminders_UserId",
+                name: "IX_MedicationReminders_ScheduleId",
                 table: "MedicationReminders",
+                column: "ScheduleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicationSchedules_AppUserId",
+                table: "MedicationSchedules",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MedicationSchedules_UserId",
+                table: "MedicationSchedules",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -298,10 +337,13 @@ namespace GHMS.DAL.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "MedicationSchedules");
 
             migrationBuilder.DropTable(
                 name: "MenstrualCycles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

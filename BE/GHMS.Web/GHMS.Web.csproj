@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GHMS.BLL\GHMS.BLL.csproj" />
+    <ProjectReference Include="..\GHMS.Common\GHMS.Common.csproj" />
   </ItemGroup>
 
 </Project>

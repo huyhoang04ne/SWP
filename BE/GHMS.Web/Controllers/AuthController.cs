@@ -48,7 +48,14 @@ namespace GHMS.Web.Controllers
         public IActionResult GetMe()
         {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
-            return Ok(new { message = $"You are authenticated! UserId: {userId}" });
+            var email = User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value;
+
+            return Ok(new
+            {
+                message = "You are authenticated!",
+                UserId = userId,
+                Email = email
+            });
         }
 
         [HttpGet("confirm-email")]

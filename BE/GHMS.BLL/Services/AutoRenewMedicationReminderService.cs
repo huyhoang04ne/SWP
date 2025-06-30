@@ -29,7 +29,7 @@ namespace GHMS.BLL.Services
                     ReminderMinute = schedule.ReminderMinute
                 };
 
-                await _reminderService.SetOrUpdateScheduleAsync(req, userId);
+                await _reminderService.SetOrUpdateScheduleSmartAsync(userId, req);
             }
         }
     }

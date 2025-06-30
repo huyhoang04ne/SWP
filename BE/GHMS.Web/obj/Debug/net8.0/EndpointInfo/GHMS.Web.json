@@ -119,7 +119,7 @@
         }
       }
     },
-    "/api/Medication/set-schedule": {
+    "/api/Medication/schedule": {
       "post": {
         "tags": [
           "Medication"
@@ -150,7 +150,7 @@
         }
       }
     },
-    "/api/Medication/upcoming-reminders": {
+    "/api/Medication/current-schedule": {
       "get": {
         "tags": [
           "Medication"
@@ -265,6 +265,14 @@
         },
         "additionalProperties": false
       },
+      "PillType": {
+        "enum": [
+          21,
+          28
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
       "RegisterReq": {
         "required": [
           "dateOfBirth",
@@ -305,20 +313,13 @@
         "type": "object",
         "properties": {
           "pillType": {
-            "maximum": 28,
-            "minimum": 21,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/components/schemas/PillType"
           },
           "reminderHour": {
-            "maximum": 23,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           },
           "reminderMinute": {
-            "maximum": 59,
-            "minimum": 0,
             "type": "integer",
             "format": "int32"
           }
@@ -328,10 +329,10 @@
     },
     "securitySchemes": {
       "Bearer": {
-        "type": "apiKey",
-        "description": "Please fill your JWT token: Bearer {your token}",
-        "name": "Authorization",
-        "in": "header"
+        "type": "http",
+        "description": "Nhập token dạng: Bearer {token}",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
       }
     }
   },

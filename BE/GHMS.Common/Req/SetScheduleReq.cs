@@ -1,16 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations;
+using GHMS.DAL.Models;
 
 namespace GHMS.Common.Req
 {
     public class SetScheduleReq
     {
-        [Range(21, 28)]
-        public int PillType { get; set; } // 21 hoặc 28
-
-        [Range(0, 23)]
+        public PillType PillType { get; set; }
         public int ReminderHour { get; set; }
-
-        [Range(0, 59)]
         public int ReminderMinute { get; set; }
     }
 }

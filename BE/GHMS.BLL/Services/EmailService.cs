@@ -2,10 +2,11 @@
 using System.Net.Mail;
 using GHMS.Common.Config;
 using Microsoft.Extensions.Options;
+using GHMS.Common.Interfaces;
 
 namespace GHMS.BLL.Services
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
         private readonly SmtpSettings _smtpSettings;
 

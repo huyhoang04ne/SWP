@@ -1,18 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GHMS.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace GHMS.DAL.Models
+public class AppUser : IdentityUser
 {
-    public class AppUser : IdentityUser
-    {
-        public string FullName { get; set; } = default!;
-        public string Gender { get; set; } = default!;
-        public DateTime DateOfBirth { get; set; }
-        public ICollection<MedicationSchedule> Schedules { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    }
+    public string FullName { get; set; } = string.Empty;
+    public string Gender { get; set; } = string.Empty;
+    public DateTime DateOfBirth { get; set; }
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public virtual ICollection<MedicationSchedule> MedicationSchedules { get; set; } = new List<MedicationSchedule>();
 }

@@ -10,17 +10,18 @@ namespace GHMS.DAL.Models
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
-        public string ScheduleId { get; set; }
+        [ForeignKey("Schedule")]
+        public int ScheduleId { get; set; }
 
+        [Required]
         public DateTime ReminderTime { get; set; }
 
         public bool IsTaken { get; set; } = false;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        [ForeignKey("ScheduleId")]
-        public MedicationSchedule Schedule { get; set; }
+        // Navigation property
+        public virtual MedicationSchedule Schedule { get; set; } = default!;
     }
 }
