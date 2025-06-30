@@ -1,16 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "../pages/Home/HomePage";
-import ModernLogin from "../pages/Login/ModernLogin";
-import RegisterPage from "../pages/Register/Register";
 import CycleTracking from "../pages/CycleTracking/CycleTracking";
 import PeriodCalendarPage from "../pages/PeriodCalendar/PeriodCalendarPage";
 import CycleSummary from "../pages/CycleTracking/CycleSummary";
 import ProtectedRoute from "../components/ProtectedRoute";
+import AuthPage from "../pages/Auth/AuthPage";
 
 const routers = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />, // dùng HomePage làm layout luôn
+    element: <HomePage />,
     children: [
       {
         path: "cycle-tracking",
@@ -39,12 +38,8 @@ const routers = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <ModernLogin />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
+    path: "/auth",
+    element: <AuthPage />,
   },
 ]);
 

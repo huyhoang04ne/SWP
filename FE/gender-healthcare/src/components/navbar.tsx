@@ -193,7 +193,7 @@ const Navbar = () => {
             </div>
           ) : (
             <Link
-              to="/login"
+              to="/auth"
               className="text-red-600 font-bold text-sm hover:underline"
             >
               Login
