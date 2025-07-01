@@ -100,8 +100,28 @@
   },
   {
     "ContainingType": "GHMS.Web.Controllers.MenstrualController",
-    "Method": "GetCurrentCyclePrediction",
-    "RelativePath": "api/Menstrual/current-cycle-prediction",
+    "Method": "GetCycleAnalytics",
+    "RelativePath": "api/Menstrual/analytics",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.MenstrualController",
+    "Method": "GetCycleSummary",
+    "RelativePath": "api/Menstrual/cycle-summary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.MenstrualController",
+    "Method": "GetFertilityStatus",
+    "RelativePath": "api/Menstrual/fertility-status",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -128,16 +148,6 @@
     "ContainingType": "GHMS.Web.Controllers.MenstrualController",
     "Method": "GetLoggedDates",
     "RelativePath": "api/Menstrual/logged-dates",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "GHMS.Web.Controllers.MenstrualController",
-    "Method": "GetPrediction",
-    "RelativePath": "api/Menstrual/prediction",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

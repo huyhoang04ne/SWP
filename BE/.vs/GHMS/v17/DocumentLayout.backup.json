@@ -3,8 +3,36 @@
   "WorkspaceRootPath": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.web\\controllers\\menstrualcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\controllers\\menstrualcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\menstrualcycleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\menstrualcycleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7191EA9A-75FD-4646-9B62-446E5E7D31AC}|GHMS.Common\\GHMS.Common.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.common\\rsp\\cyclepredictionrsp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7191EA9A-75FD-4646-9B62-446E5E7D31AC}|GHMS.Common\\GHMS.Common.csproj|solutionrelative:ghms.common\\rsp\\cyclepredictionrsp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\medicationreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\medicationreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.web\\controllers\\medicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\controllers\\medicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.web\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7191EA9A-75FD-4646-9B62-446E5E7D31AC}|GHMS.Common\\GHMS.Common.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.common\\rsp\\fertilewindowrsp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7191EA9A-75FD-4646-9B62-446E5E7D31AC}|GHMS.Common\\GHMS.Common.csproj|solutionrelative:ghms.common\\rsp\\fertilewindowrsp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\authsvc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\authsvc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\templates\\medicationremindertemplate.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -19,10 +47,6 @@
       "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\ghms.bll.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.web\\controllers\\medicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\controllers\\medicationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7191EA9A-75FD-4646-9B62-446E5E7D31AC}|GHMS.Common\\GHMS.Common.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.common\\interfaces\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7191EA9A-75FD-4646-9B62-446E5E7D31AC}|GHMS.Common\\GHMS.Common.csproj|solutionrelative:ghms.common\\interfaces\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -35,20 +59,8 @@
       "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\authsvc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\authsvc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.web\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\autorenewmedicationreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\autorenewmedicationreminderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\menstrualcycleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\menstrualcycleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B8E30D53-94A8-4C65-973E-25C4022ACC10}|GHMS.DAL\\GHMS.DAL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.dal\\models\\medicationreminder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,21 +94,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 150,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 22,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "MedicationReminderService.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MedicationReminderService.cs",
               "RelativeDocumentMoniker": "GHMS.BLL\\Services\\MedicationReminderService.cs",
               "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MedicationReminderService.cs",
               "RelativeToolTip": "GHMS.BLL\\Services\\MedicationReminderService.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAQwF8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAAwLIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-24T15:22:17.561Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -180,59 +191,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MedicationReminderTemplate.html",
-              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "RelativeDocumentMoniker": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "RelativeToolTip": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAcwB4AAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-06-30T06:58:38.621Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MedicationReminderTemplate.html",
-              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "RelativeDocumentMoniker": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "RelativeToolTip": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-06-30T06:58:16.051Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GHMS.BLL",
-              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
-              "RelativeDocumentMoniker": "GHMS.BLL\\GHMS.BLL.csproj",
-              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
-              "RelativeToolTip": "GHMS.BLL\\GHMS.BLL.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-30T06:56:26.656Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Program.cs",
-              "RelativeDocumentMoniker": "GHMS.Web\\Program.cs",
-              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Program.cs",
-              "RelativeToolTip": "GHMS.Web\\Program.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAAAIYAAAAkAAAAAAAAAA==",
+              "Title": "CyclePredictionRsp.cs",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Rsp\\CyclePredictionRsp.cs",
+              "RelativeDocumentMoniker": "GHMS.Common\\Rsp\\CyclePredictionRsp.cs",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Rsp\\CyclePredictionRsp.cs",
+              "RelativeToolTip": "GHMS.Common\\Rsp\\CyclePredictionRsp.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T15:33:14.096Z",
+              "WhenOpened": "2025-07-01T04:40:43.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MenstrualController.cs",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Controllers\\MenstrualController.cs",
+              "RelativeDocumentMoniker": "GHMS.Web\\Controllers\\MenstrualController.cs",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Controllers\\MenstrualController.cs",
+              "RelativeToolTip": "GHMS.Web\\Controllers\\MenstrualController.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAAwEkAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T12:51:50.76Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "EmailService.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\EmailService.cs",
               "RelativeDocumentMoniker": "GHMS.BLL\\Services\\EmailService.cs",
@@ -240,45 +224,55 @@
               "RelativeToolTip": "GHMS.BLL\\Services\\EmailService.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAAYwDAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:29:27.531Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-29T13:29:27.531Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "GHMS.Web\\Controllers\\AuthController.cs",
               "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Controllers\\AuthController.cs",
               "RelativeToolTip": "GHMS.Web\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAAADoAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAwEQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-29T14:09:44.452Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "AuthSvc.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\AuthSvc.cs",
               "RelativeDocumentMoniker": "GHMS.BLL\\Services\\AuthSvc.cs",
               "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\AuthSvc.cs",
               "RelativeToolTip": "GHMS.BLL\\Services\\AuthSvc.cs",
-              "ViewState": "AgIAAG4AAAAAAAAAAAApwHsAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAYwJkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-29T16:57:21.662Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IEmailService.cs",
-              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Interfaces\\IEmailService.cs",
-              "RelativeDocumentMoniker": "GHMS.Common\\Interfaces\\IEmailService.cs",
-              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Interfaces\\IEmailService.cs",
-              "RelativeToolTip": "GHMS.Common\\Interfaces\\IEmailService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "MenstrualCycleService.cs",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "RelativeDocumentMoniker": "GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "RelativeToolTip": "GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAAAJ8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:17:27.655Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-26T13:24:03.001Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "FertileWindowRsp.cs",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Rsp\\FertileWindowRsp.cs",
+              "RelativeDocumentMoniker": "GHMS.Common\\Rsp\\FertileWindowRsp.cs",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Rsp\\FertileWindowRsp.cs",
+              "RelativeToolTip": "GHMS.Common\\Rsp\\FertileWindowRsp.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-30T12:51:01.916Z"
             },
             {
               "$type": "Document",
@@ -288,14 +282,73 @@
               "RelativeDocumentMoniker": "GHMS.Web\\Controllers\\MedicationController.cs",
               "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Controllers\\MedicationController.cs",
               "RelativeToolTip": "GHMS.Web\\Controllers\\MedicationController.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAYwCgAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAwEAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-24T15:26:50.913Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-24T15:26:50.913Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Program.cs",
+              "RelativeDocumentMoniker": "GHMS.Web\\Program.cs",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Program.cs",
+              "RelativeToolTip": "GHMS.Web\\Program.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAAAIYAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-24T15:33:14.096Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "GHMS.BLL.csproj",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
+              "RelativeDocumentMoniker": "GHMS.BLL\\GHMS.BLL.csproj",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\GHMS.BLL.csproj",
+              "RelativeToolTip": "GHMS.BLL\\GHMS.BLL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-30T06:56:26.656Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MedicationReminderTemplate.html",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "RelativeDocumentMoniker": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "RelativeToolTip": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-06-30T06:58:16.051Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "MedicationReminderTemplate.html",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "RelativeDocumentMoniker": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "RelativeToolTip": "GHMS.BLL\\Templates\\MedicationReminderTemplate.html",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAcwB4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-06-30T06:58:38.621Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "IEmailService.cs",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Interfaces\\IEmailService.cs",
+              "RelativeDocumentMoniker": "GHMS.Common\\Interfaces\\IEmailService.cs",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Interfaces\\IEmailService.cs",
+              "RelativeToolTip": "GHMS.Common\\Interfaces\\IEmailService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-29T13:17:27.655Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "MedicationReminder.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\Models\\MedicationReminder.cs",
               "RelativeDocumentMoniker": "GHMS.DAL\\Models\\MedicationReminder.cs",
@@ -307,7 +360,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "AutoRenewMedicationReminderService.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\AutoRenewMedicationReminderService.cs",
               "RelativeDocumentMoniker": "GHMS.BLL\\Services\\AutoRenewMedicationReminderService.cs",
@@ -319,7 +372,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "AppUser.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\Models\\AppUser.cs",
               "RelativeDocumentMoniker": "GHMS.DAL\\Models\\AppUser.cs",
@@ -331,19 +384,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "MenstrualCycleService.cs",
-              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MenstrualCycleService.cs",
-              "RelativeDocumentMoniker": "GHMS.BLL\\Services\\MenstrualCycleService.cs",
-              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MenstrualCycleService.cs",
-              "RelativeToolTip": "GHMS.BLL\\Services\\MenstrualCycleService.cs",
-              "ViewState": "AgIAAL0AAAAAAAAAAAAYwN4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T13:24:03.001Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "PillType.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\Models\\PillType.cs",
               "RelativeDocumentMoniker": "GHMS.DAL\\Models\\PillType.cs",
@@ -355,7 +396,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "MedicationSchedule.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\Models\\MedicationSchedule.cs",
               "RelativeDocumentMoniker": "GHMS.DAL\\Models\\MedicationSchedule.cs",
@@ -367,7 +408,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "SetScheduleReq.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Common\\Req\\SetScheduleReq.cs",
               "RelativeDocumentMoniker": "GHMS.Common\\Req\\SetScheduleReq.cs",
@@ -379,7 +420,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "GHMSContext.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.DAL\\Data\\GHMSContext.cs",
               "RelativeDocumentMoniker": "GHMS.DAL\\Data\\GHMSContext.cs",

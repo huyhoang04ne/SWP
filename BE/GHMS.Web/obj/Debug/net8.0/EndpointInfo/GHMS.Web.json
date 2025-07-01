@@ -193,7 +193,7 @@
         }
       }
     },
-    "/api/Menstrual/prediction": {
+    "/api/Menstrual/cycle-summary": {
       "get": {
         "tags": [
           "Menstrual"
@@ -217,7 +217,19 @@
         }
       }
     },
-    "/api/Menstrual/current-cycle-prediction": {
+    "/api/Menstrual/fertility-status": {
+      "get": {
+        "tags": [
+          "Menstrual"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Menstrual/analytics": {
       "get": {
         "tags": [
           "Menstrual"
