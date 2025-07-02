@@ -101,6 +101,7 @@ namespace GHMS.BLL.Services
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "Patient");
                 return new AuthRsp { Success = true, Message = "Xác nhận email thành công." };
             }
 
@@ -121,9 +122,45 @@ namespace GHMS.BLL.Services
             if (!result.Succeeded)
                 return new AuthRsp { Success = false, Message = "Sai thông tin đăng nhập." };
 
-            var token = await GenerateJwtToken(user);
-            return new AuthRsp { Success = true, Message = "Đăng nhập thành công", Token = token };
+            // ✅ Lấy roles
+            var roles = await _userManager.GetRolesAsync(user);
+
+            // ✅ Tạo danh sách claim
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, user.Email),
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+    };
+
+            // ✅ Thêm claim Role vào JWT
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            // ✅ Tạo token
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _jwtSettings.Issuer,
+                audience: _jwtSettings.Audience,
+                expires: DateTime.UtcNow.AddHours(2),
+                claims: claims,
+                signingCredentials: creds
+            );
+
+            var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return new AuthRsp
+            {
+                Success = true,
+                Message = "Đăng nhập thành công",
+                Token = tokenStr
+            };
         }
+
 
         private async Task<string> GenerateJwtToken(AppUser user)
         {

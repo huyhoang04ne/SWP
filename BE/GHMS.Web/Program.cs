@@ -22,6 +22,7 @@ builder.Services.AddDbContext<GHMSContext>(options =>
         .LogTo(Console.WriteLine, LogLevel.Information) // 👈 log truy vấn SQL
 );
 
+
 // 📧 2. Cấu hình AppSettings
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
@@ -43,6 +44,8 @@ builder.Services.AddScoped<MenstrualCycleService>();
 builder.Services.AddScoped<MedicationReminderService>();
 builder.Services.AddHostedService<DeleteUnverifiedUsersJob>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ConsultationService>();
+builder.Services.AddScoped<ScheduleService>();
 
 // 🔁 5. Hangfire setup
 builder.Services.AddHangfire(config =>
@@ -139,5 +142,11 @@ RecurringJob.AddOrUpdate<MedicationReminderService>(
 
 //app.UseHttpsRedirection();
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await GHMS.DAL.Seed.DataSeeder.SeedRolesAndAdminAsync(services);
+}
 
 app.Run();

@@ -200,5 +200,43 @@ namespace GHMS.BLL.Services
                 .OrderBy(x => x.StartDate)
                 .ToListAsync();
         }
+
+
+        public async Task<List<CyclePredictionRsp>> GetAllCyclePredictionsAsync(string userId)
+        {
+            var cycles = await _context.MenstrualCycles
+                .Where(x => x.UserId == userId)
+                .OrderBy(x => x.StartDate)
+                .ToListAsync();
+
+            var result = new List<CyclePredictionRsp>();
+            for (int i = 0; i < cycles.Count; i++)
+            {
+                var current = cycles[i];
+                int predictedLength = current.CycleLength > 0 ? current.CycleLength : PredictCycleLength(cycles);
+
+                // Tính toán các trường bổ sung
+                var ovulation = current.StartDate.AddDays(predictedLength / 2);
+                var fertileStart = ovulation.AddDays(-3);
+                var fertileEnd = ovulation.AddDays(3);
+                string status = "Low";
+                var today = DateTime.UtcNow.Date;
+                if (today >= fertileStart.Date && today <= fertileEnd.Date)
+                    status = "High";
+
+                result.Add(new CyclePredictionRsp
+                {
+                    StartDate = current.StartDate,
+                    PeriodLength = current.PeriodLength,
+                    CycleLength = predictedLength,
+                    PredictedNextCycleStartDate = current.StartDate.AddDays(predictedLength),
+                    OvulationDate = ovulation,
+                    FertileStart = fertileStart,
+                    FertileEnd = fertileEnd,
+                    Status = status
+                });
+            }
+            return result;
+        }
     }
 }

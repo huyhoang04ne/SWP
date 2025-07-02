@@ -101,6 +101,49 @@ namespace GHMS.DAL.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("GHMS.DAL.Models.ConsultationSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CounselorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PatientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ScheduledDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimeSlot")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CounselorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("ConsultationSchedules");
+                });
+
             modelBuilder.Entity("GHMS.DAL.Models.MedicationReminder", b =>
                 {
                     b.Property<string>("Id")
@@ -215,6 +258,40 @@ namespace GHMS.DAL.Migrations
                     b.HasIndex("CycleId");
 
                     b.ToTable("MenstrualPeriodDays");
+                });
+
+            modelBuilder.Entity("GHMS.DAL.Models.WorkingSchedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CounselorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TimeSlot")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("WorkDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CounselorId");
+
+                    b.ToTable("WorkingSchedules");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -350,6 +427,25 @@ namespace GHMS.DAL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("GHMS.DAL.Models.ConsultationSchedule", b =>
+                {
+                    b.HasOne("AppUser", "Counselor")
+                        .WithMany()
+                        .HasForeignKey("CounselorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("AppUser", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Counselor");
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("GHMS.DAL.Models.MedicationReminder", b =>
                 {
                     b.HasOne("GHMS.DAL.Models.MedicationSchedule", "Schedule")
@@ -385,6 +481,17 @@ namespace GHMS.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("MenstrualCycle");
+                });
+
+            modelBuilder.Entity("GHMS.DAL.Models.WorkingSchedule", b =>
+                {
+                    b.HasOne("AppUser", "Counselor")
+                        .WithMany()
+                        .HasForeignKey("CounselorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Counselor");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

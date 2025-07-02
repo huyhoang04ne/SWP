@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace GHMS.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Patient")]
     [ApiController]
     [Route("api/[controller]")]
     public class MedicationController : ControllerBase

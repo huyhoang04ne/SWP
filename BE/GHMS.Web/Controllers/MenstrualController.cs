@@ -8,7 +8,7 @@ using System.Security.Claims;
 
 namespace GHMS.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Patient")]
     [ApiController]
     [Route("api/[controller]")]
     public class MenstrualController : ControllerBase
@@ -154,6 +154,20 @@ namespace GHMS.Web.Controllers
                 PeriodTrend = cycles.Select(c => new { c.StartDate, c.PeriodLength }),
                 TotalCyclesAvailable = cycles.Count
             });
+        }
+
+        /// <summary>
+        /// Trả về danh sách prediction cho tất cả các chu kỳ đã nhập
+        /// </summary>
+        [HttpGet("all-predictions")]
+        public async Task<IActionResult> GetAllCyclePredictions()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized("User not authenticated.");
+
+            var predictions = await _service.GetAllCyclePredictionsAsync(userId);
+            return Ok(predictions);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace GHMS.DAL.Data
         public GHMSContext(DbContextOptions<GHMSContext> options) : base(options) { }
         public GHMSContext() { }
 
+        public DbSet<ConsultationSchedule> ConsultationSchedules { get; set; }
+        public DbSet<WorkingSchedule> WorkingSchedules { get; set; } // ✅ Thêm mới
         public DbSet<MenstrualCycle> MenstrualCycles { get; set; }
         public DbSet<MenstrualPeriodDay> MenstrualPeriodDays { get; set; }
         public DbSet<MedicationReminder> MedicationReminders { get; set; }
@@ -20,13 +22,13 @@ namespace GHMS.DAL.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // MenstrualCycle
+            // ✅ MenstrualCycle
             modelBuilder.Entity<MenstrualCycle>(entity =>
             {
                 entity.HasKey(e => e.Id);
             });
 
-            // MenstrualPeriodDay ↔ MenstrualCycle
+            // ✅ MenstrualPeriodDay ↔ MenstrualCycle
             modelBuilder.Entity<MenstrualPeriodDay>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -39,7 +41,7 @@ namespace GHMS.DAL.Data
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // MedicationSchedule ↔ AppUser
+            // ✅ MedicationSchedule ↔ AppUser
             modelBuilder.Entity<MedicationSchedule>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -47,12 +49,12 @@ namespace GHMS.DAL.Data
                 entity.Property(e => e.UserId).IsRequired();
 
                 entity.HasOne(e => e.User)
-                      .WithMany() // Nếu muốn user.MedicationSchedules thì thêm ICollection ở AppUser
+                      .WithMany()
                       .HasForeignKey(e => e.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // MedicationReminder ↔ MedicationSchedule
+            // ✅ MedicationReminder ↔ MedicationSchedule
             modelBuilder.Entity<MedicationReminder>(entity =>
             {
                 entity.HasKey(e => e.Id);
@@ -62,6 +64,35 @@ namespace GHMS.DAL.Data
                 entity.HasOne(e => e.Schedule)
                       .WithMany(s => s.Reminders)
                       .HasForeignKey(e => e.ScheduleId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // ✅ ConsultationSchedule ↔ Patient & Counselor
+            modelBuilder.Entity<ConsultationSchedule>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.HasOne(e => e.Patient)
+                      .WithMany()
+                      .HasForeignKey(e => e.PatientId)
+                      .OnDelete(DeleteBehavior.Restrict); // tránh xoá lan
+
+                entity.HasOne(e => e.Counselor)
+                      .WithMany()
+                      .HasForeignKey(e => e.CounselorId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // ✅ WorkingSchedule ↔ Counselor
+            modelBuilder.Entity<WorkingSchedule>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+
+                entity.Property(e => e.CounselorId).IsRequired();
+
+                entity.HasOne(e => e.Counselor)
+                      .WithMany()
+                      .HasForeignKey(e => e.CounselorId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
         }
