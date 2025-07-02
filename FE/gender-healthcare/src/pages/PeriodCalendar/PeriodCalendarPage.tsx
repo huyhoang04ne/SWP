@@ -45,7 +45,7 @@ const PeriodCalendarPage: React.FC = () => {
       const prediction = await getPrediction();
       console.log("🔍 Prediction received:", prediction);
 
-      navigate("/cycle-summary", { state: { prediction } });
+      navigate("/cycle-summary", { state: { prediction, selectedDates } });
     } catch (error: any) {
       console.error("❌ Error saving or predicting:", error);
       setMessage(

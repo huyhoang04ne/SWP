@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { logout } from "../api/authApi";
 
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -16,10 +17,9 @@ const Navbar = () => {
     setOpenDropdown(openDropdown === menu ? null : menu);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    logout();
     setIsLoggedIn(false);
     setOpenDropdown(null);
-    navigate("/login");
   };
 
   const isInDichVu =

@@ -15,3 +15,12 @@ export const savePeriodDates = (dates: Date[]) =>
 export const getPrediction = () => axiosInstance.get("/menstrual/prediction");
 
 export const getCurrentCycle = () => axiosInstance.get("/menstrual/current-cycle-prediction");
+
+export const register = (data: { email: string; password: string; fullName: string }) => {
+  return axiosInstance.post("/auth/register", data);
+};
+
+export const logout = () => {
+  localStorage.removeItem("token");
+  window.location.href = "/auth";
+};

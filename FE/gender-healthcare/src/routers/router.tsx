@@ -41,6 +41,10 @@ const routers = createBrowserRouter([
     path: "/auth",
     element: <AuthPage />,
   },
+  {
+    path: "/login",
+    element: <AuthPage />,
+  },
 ]);
 
 export default routers;
