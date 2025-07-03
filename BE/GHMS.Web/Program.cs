@@ -46,6 +46,8 @@ builder.Services.AddHostedService<DeleteUnverifiedUsersJob>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<ConsultationService>();
 builder.Services.AddScoped<ScheduleService>();
+builder.Services.AddScoped<NotificationService>();
+builder.Services.AddSingleton<GHMS.Common.Config.NotificationTemplateSettings>();
 
 // 🔁 5. Hangfire setup
 builder.Services.AddHangfire(config =>

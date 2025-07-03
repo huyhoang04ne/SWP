@@ -138,6 +138,27 @@
   },
   {
     "ContainingType": "GHMS.Web.Controllers.ConsultationController",
+    "Method": "CancelConsultation",
+    "RelativePath": "api/Consultation/cancel/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reason",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.ConsultationController",
     "Method": "GetMyAppointments",
     "RelativePath": "api/Consultation/my-appointments",
     "HttpMethod": "GET",
@@ -205,6 +226,16 @@
   },
   {
     "ContainingType": "GHMS.Web.Controllers.MenstrualController",
+    "Method": "GetAllCyclePredictions",
+    "RelativePath": "api/Menstrual/all-predictions",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.MenstrualController",
     "Method": "GetCycleAnalytics",
     "RelativePath": "api/Menstrual/analytics",
     "HttpMethod": "GET",
@@ -257,6 +288,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.NotificationController",
+    "Method": "GetMyNotifications",
+    "RelativePath": "api/Notification/my",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.NotificationController",
+    "Method": "MarkAsRead",
+    "RelativePath": "api/Notification/read/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

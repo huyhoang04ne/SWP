@@ -17,6 +17,7 @@ namespace GHMS.DAL.Data
         public DbSet<MenstrualPeriodDay> MenstrualPeriodDays { get; set; }
         public DbSet<MedicationReminder> MedicationReminders { get; set; }
         public DbSet<MedicationSchedule> MedicationSchedules { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
