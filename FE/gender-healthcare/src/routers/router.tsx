@@ -5,6 +5,7 @@ import PeriodCalendarPage from "../pages/PeriodCalendar/PeriodCalendarPage";
 import CycleSummary from "../pages/CycleTracking/CycleSummary";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AuthPage from "../pages/Auth/AuthPage";
+import MedicationReminderPage from '../pages/MedicationReminderPage';
 
 const routers = createBrowserRouter([
   {
@@ -44,6 +45,14 @@ const routers = createBrowserRouter([
   {
     path: "/login",
     element: <AuthPage />,
+  },
+  {
+    path: "/medication-reminder",
+    element: (
+      <ProtectedRoute>
+        <MedicationReminderPage />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

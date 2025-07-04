@@ -24,7 +24,8 @@ const Navbar = () => {
 
   const isInDichVu =
     location.pathname.startsWith("/cycle-tracking") ||
-    location.pathname.startsWith("/dich-vu");
+    location.pathname.startsWith("/dich-vu") ||
+    location.pathname.startsWith("/medication-reminder");
 
   return (
     <nav className="bg-purple-100 border-t border-b border-purple-200 shadow-sm sticky top-0 z-50">
@@ -94,6 +95,19 @@ const Navbar = () => {
                     onClick={() => setOpenDropdown(null)}
                   >
                     Chu kỳ kinh nguyệt
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/medication-reminder"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/medication-reminder"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Nhắc thuốc
                   </Link>
                 </li>
               </ul>

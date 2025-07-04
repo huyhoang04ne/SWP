@@ -21,8 +21,8 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("token");
-      alert("Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.");
-      window.location.href = "/login";
+      // Không hiện alert và không redirect ở đây nữa
+      // Để component tự xử lý lỗi đăng nhập
     }
     return Promise.reject(error);
   }

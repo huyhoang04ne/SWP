@@ -36,16 +36,45 @@ const PeriodCalendarPage: React.FC = () => {
       return;
     }
 
+    // Sắp xếp các ngày theo thứ tự tăng dần
+    const sortedDates = [...selectedDates].sort((a, b) => a.getTime() - b.getTime());
+    // Tìm ngày đầu tiên của mỗi chu kỳ (chuỗi ngày liên tiếp)
+    const firstDays: Date[] = [];
+    for (let i = 0; i < sortedDates.length; i++) {
+      if (i === 0) {
+        firstDays.push(sortedDates[i]);
+      } else {
+        const prev = sortedDates[i - 1];
+        const curr = sortedDates[i];
+        // Nếu ngày hiện tại không liên tiếp với ngày trước đó (khác nhau > 1 ngày), thì là đầu chu kỳ mới
+        const diff = Math.floor((curr.getTime() - prev.getTime()) / (1000 * 60 * 60 * 24));
+        if (diff > 1) {
+          firstDays.push(curr);
+        }
+      }
+    }
+    // Kiểm tra khoảng cách giữa các ngày đầu chu kỳ
+    for (let i = 1; i < firstDays.length; i++) {
+      const diffDays = Math.floor((firstDays[i].getTime() - firstDays[i - 1].getTime()) / (1000 * 60 * 60 * 24));
+      if (diffDays < 21 || diffDays > 35) {
+        setMessage("Khoảng cách giữa các kỳ kinh nguyệt phải từ 21 đến 35 ngày (tính từ ngày đầu của mỗi kỳ). Vui lòng kiểm tra lại!");
+        return;
+      }
+    }
+
     try {
       setSaving(true);
       setMessage("");
 
       await logPeriodDates(selectedDates);
+      // Gọi lại API để cập nhật danh sách ngày từ backend
+      const dates = await getLoggedDates();
+      setSelectedDates(dates);
 
       const prediction = await getPrediction();
       console.log("🔍 Prediction received:", prediction);
 
-      navigate("/cycle-summary", { state: { prediction, selectedDates } });
+      navigate("/cycle-summary", { state: { prediction, selectedDates: dates } });
     } catch (error: any) {
       console.error("❌ Error saving or predicting:", error);
       setMessage(

@@ -16,8 +16,8 @@ export const getPrediction = () => axiosInstance.get("/menstrual/prediction");
 
 export const getCurrentCycle = () => axiosInstance.get("/menstrual/current-cycle-prediction");
 
-export const register = (data: { email: string; password: string; fullName: string }) => {
-  return axiosInstance.post("/auth/register", data);
+export const register = (data: { email: string; password: string; fullName: string; gender: string; dateOfBirth: string }) => {
+  return axiosInstance.post("/auth/signup", data);
 };
 
 export const logout = () => {

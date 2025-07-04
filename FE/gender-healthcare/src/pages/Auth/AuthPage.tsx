@@ -7,6 +7,8 @@ const AuthPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [gender, setGender] = useState('Male');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -32,7 +34,7 @@ const AuthPage = () => {
           setError('Đăng nhập thất bại.');
         }
       } else {
-        await register({ email, password, fullName });
+        await register({ email, password, fullName, gender, dateOfBirth });
         setSuccess('Đăng ký thành công! Vui lòng đăng nhập.');
         setIsSignIn(true);
       }
@@ -78,14 +80,33 @@ const AuthPage = () => {
             </p>
             <form className="space-y-4" onSubmit={handleSubmit}>
               {!isSignIn && (
-                <input
-                  type="text"
-                  placeholder="Name"
-                  className="w-full px-4 py-2 border rounded-lg"
-                  value={fullName}
-                  onChange={e => setFullName(e.target.value)}
-                  required
-                />
+                <>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    className="w-full px-4 py-2 border rounded-lg"
+                    value={fullName}
+                    onChange={e => setFullName(e.target.value)}
+                    required
+                  />
+                  <select
+                    className="w-full px-4 py-2 border rounded-lg"
+                    value={gender}
+                    onChange={e => setGender(e.target.value)}
+                    required
+                  >
+                    <option value="Male">Nam</option>
+                    <option value="Female">Nữ</option>
+                    <option value="Other">Khác</option>
+                  </select>
+                  <input
+                    type="date"
+                    className="w-full px-4 py-2 border rounded-lg"
+                    value={dateOfBirth}
+                    onChange={e => setDateOfBirth(e.target.value)}
+                    required
+                  />
+                </>
               )}
               <input
                 type="email"
