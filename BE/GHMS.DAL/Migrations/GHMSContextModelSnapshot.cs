@@ -260,6 +260,39 @@ namespace GHMS.DAL.Migrations
                     b.ToTable("MenstrualPeriodDays");
                 });
 
+            modelBuilder.Entity("GHMS.DAL.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("GHMS.DAL.Models.WorkingSchedule", b =>
                 {
                     b.Property<int>("Id")
@@ -481,6 +514,17 @@ namespace GHMS.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("MenstrualCycle");
+                });
+
+            modelBuilder.Entity("GHMS.DAL.Models.Notification", b =>
+                {
+                    b.HasOne("AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("GHMS.DAL.Models.WorkingSchedule", b =>
