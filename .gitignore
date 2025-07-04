@@ -1,0 +1,18 @@
+# Backend build folders
+BE/**/bin/
+BE/**/obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# DLL, exe, cache
+*.dll
+*.exe
+*.pdb
+*.cache
+
+# Node modules & frontend build
+FE/node_modules/
+FE/build/
