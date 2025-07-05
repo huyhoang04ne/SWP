@@ -87,4 +87,4 @@ const MedicationReminderForm: React.FC = () => {
   );
 };
 
-export default MedicationReminderForm; 
+export default MedicationReminderForm;
