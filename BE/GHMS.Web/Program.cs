@@ -48,6 +48,7 @@ builder.Services.AddScoped<ConsultationService>();
 builder.Services.AddScoped<ScheduleService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddSingleton<GHMS.Common.Config.NotificationTemplateSettings>();
+builder.Services.AddScoped<NotifyUpcomingEventsJob>();
 
 // 🔁 5. Hangfire setup
 builder.Services.AddHangfire(config =>
@@ -138,8 +139,21 @@ app.UseHangfireDashboard("/hangfire"); // http://localhost:{port}/hangfire
 RecurringJob.AddOrUpdate<MedicationReminderService>(
     "check-pill-reminder-every-minute",
     svc => svc.SendDailyReminders(),
-    Cron.Minutely(), // 👈 chạy mỗi phút
-    TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time") // giờ Việt Nam
+    Cron.Minutely(),
+    new RecurringJobOptions
+    {
+        TimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time")
+    }
+);
+
+RecurringJob.AddOrUpdate<NotifyUpcomingEventsJob>(
+    "notify-upcoming-events",
+    job => job.RunAsync(),
+    Cron.Daily(),
+    new RecurringJobOptions
+    {
+        TimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time")
+    }
 );
 
 //app.UseHttpsRedirection();

@@ -4,6 +4,7 @@ using GHMS.Common.Rsp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using GHMS.DAL.Models;
 
 namespace GHMS.Web.Controllers
 {
@@ -78,6 +79,24 @@ namespace GHMS.Web.Controllers
                 return Unauthorized();
 
             var res = await _service.CancelConsultationAsync(id, userId, role, reason);
+            return res.Success ? Ok(res) : BadRequest(res);
+        }
+
+        [Authorize(Roles = "Counselor")]
+        [HttpPost("propose-reschedule")]
+        public async Task<IActionResult> ProposeReschedule([FromBody] RescheduleProposalReq req)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var res = await _service.ProposeRescheduleAsync(userId, req);
+            return res.Success ? Ok(res) : BadRequest(res);
+        }
+
+        [Authorize(Roles = "Patient")]
+        [HttpPost("respond-reschedule")]
+        public async Task<IActionResult> RespondReschedule([FromBody] RespondRescheduleReq req)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var res = await _service.RespondRescheduleAsync(userId, req);
             return res.Success ? Ok(res) : BadRequest(res);
         }
     }

@@ -293,6 +293,69 @@ namespace GHMS.DAL.Migrations
                     b.ToTable("Notifications");
                 });
 
+            modelBuilder.Entity("GHMS.DAL.Models.ProposedSlot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RescheduleProposalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimeSlot")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RescheduleProposalId");
+
+                    b.ToTable("ProposedSlot");
+                });
+
+            modelBuilder.Entity("GHMS.DAL.Models.RescheduleProposal", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CounselorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OldBookingId")
+                        .HasColumnType("int");
+
+                    b.Property<bool?>("PatientAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PatientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SelectedSlotId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SelectedSlotId");
+
+                    b.ToTable("RescheduleProposals");
+                });
+
             modelBuilder.Entity("GHMS.DAL.Models.WorkingSchedule", b =>
                 {
                     b.Property<int>("Id")
@@ -527,6 +590,27 @@ namespace GHMS.DAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("GHMS.DAL.Models.ProposedSlot", b =>
+                {
+                    b.HasOne("GHMS.DAL.Models.RescheduleProposal", "RescheduleProposal")
+                        .WithMany("ProposedSlots")
+                        .HasForeignKey("RescheduleProposalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RescheduleProposal");
+                });
+
+            modelBuilder.Entity("GHMS.DAL.Models.RescheduleProposal", b =>
+                {
+                    b.HasOne("GHMS.DAL.Models.ProposedSlot", "SelectedSlot")
+                        .WithMany()
+                        .HasForeignKey("SelectedSlotId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("SelectedSlot");
+                });
+
             modelBuilder.Entity("GHMS.DAL.Models.WorkingSchedule", b =>
                 {
                     b.HasOne("AppUser", "Counselor")
@@ -602,6 +686,11 @@ namespace GHMS.DAL.Migrations
             modelBuilder.Entity("GHMS.DAL.Models.MenstrualCycle", b =>
                 {
                     b.Navigation("PeriodDays");
+                });
+
+            modelBuilder.Entity("GHMS.DAL.Models.RescheduleProposal", b =>
+                {
+                    b.Navigation("ProposedSlots");
                 });
 #pragma warning restore 612, 618
         }

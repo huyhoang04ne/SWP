@@ -97,12 +97,12 @@ namespace GHMS.BLL.Services
             var counselor = await _context.Users.FindAsync(counselorId);
             if (patient != null && counselor != null)
             {
-                var subject = _notificationTemplates.BookingSuccessSubject;
-                var body = string.Format(_notificationTemplates.BookingSuccessBody, patient.FullName, counselor.FullName, booking.ScheduledDate);
+                var subject = _notificationTemplates.BookingPendingSubject;
+                var body = string.Format(_notificationTemplates.BookingPendingBody, patient.FullName, counselor.FullName, booking.ScheduledDate);
                 await _emailService.SendEmailAsync(patient.Email, subject, body);
             }
 
-            return BaseResponse.Ok(booking, "Đặt lịch thành công.");
+            return BaseResponse.Ok(booking, "Đã đặt lịch thành công, vui lòng chờ tư vấn viên xác nhận.");
         }
 
         public async Task<List<ConsultationSchedule>> GetBookingsByPatientAsync(string patientId)
@@ -182,12 +182,99 @@ namespace GHMS.BLL.Services
             var counselor = await _context.Users.FindAsync(booking.CounselorId);
             if (patient != null && counselor != null)
             {
-                var subject = _notificationTemplates.CancelBookingPatientSubject;
-                var body = string.Format(_notificationTemplates.CancelBookingPatientBody, patient.FullName, counselor.FullName, booking.ScheduledDate, reason);
+                var subject = _notificationTemplates.CancelBookingSubject;
+                var body = string.Format(_notificationTemplates.CancelBookingBody, patient.FullName, counselor.FullName, booking.ScheduledDate, reason);
                 await _emailService.SendEmailAsync(patient.Email, subject, body);
             }
 
             return BaseResponse.Ok(null, "Huỷ lịch thành công.");
+        }
+
+        public async Task<BaseResponse> ProposeRescheduleAsync(string counselorId, RescheduleProposalReq req)
+        {
+            // 1. Hủy lịch cũ
+            var oldBooking = await _context.ConsultationSchedules.FindAsync(req.OldBookingId);
+            if (oldBooking == null) return BaseResponse.Fail("Không tìm thấy lịch cũ.");
+            if (oldBooking.CounselorId != counselorId) return BaseResponse.Fail("Không có quyền.");
+
+            oldBooking.IsCanceled = true;
+            oldBooking.Status = ConsultationStatus.Cancelled;
+            oldBooking.Notes += $"\n[Huỷ lịch]: {req.Reason}";
+            await _context.SaveChangesAsync();
+
+            // 2. Tạo proposal
+            var proposal = new RescheduleProposal
+            {
+                OldBookingId = req.OldBookingId,
+                CounselorId = counselorId,
+                PatientId = oldBooking.PatientId,
+                Reason = req.Reason,
+                CreatedAt = DateTime.UtcNow,
+                ProposedSlots = req.ProposedSlots.Select(s => new ProposedSlot
+                {
+                    Date = s.Date,
+                    TimeSlot = s.TimeSlot
+                }).ToList()
+            };
+            _context.RescheduleProposals.Add(proposal);
+            await _context.SaveChangesAsync();
+
+            // 3. Gửi email cho Patient
+            var patient = await _context.Users.FindAsync(oldBooking.PatientId);
+            var counselor = await _context.Users.FindAsync(counselorId);
+            if (patient != null && counselor != null)
+            {
+                var slotHtml = string.Join("<br>", proposal.ProposedSlots.Select(s => $"{s.Date:dd/MM/yyyy} - Ca {s.TimeSlot}"));
+                var subject = _notificationTemplates.RescheduleProposalSubject;
+                var body = string.Format(_notificationTemplates.RescheduleProposalBody,
+                    patient.FullName, counselor.FullName, req.Reason, slotHtml);
+                await _emailService.SendEmailAsync(patient.Email, subject, body);
+            }
+
+            return BaseResponse.Ok(proposal, "Đã gửi đề xuất đổi lịch cho bệnh nhân.");
+        }
+
+        public async Task<BaseResponse> RespondRescheduleAsync(string patientId, RespondRescheduleReq req)
+        {
+            var proposal = await _context.RescheduleProposals
+                .Include(p => p.ProposedSlots)
+                .FirstOrDefaultAsync(p => p.Id == req.ProposalId && p.PatientId == patientId);
+
+            if (proposal == null) return BaseResponse.Fail("Không tìm thấy đề xuất.");
+
+            proposal.PatientAccepted = req.Accept;
+            if (req.Accept && req.SelectedSlot != null)
+            {
+                // Tạo lịch mới
+                var slot = proposal.ProposedSlots.FirstOrDefault(s =>
+                    s.Date == req.SelectedSlot.Date && s.TimeSlot == req.SelectedSlot.TimeSlot);
+                if (slot == null) return BaseResponse.Fail("Slot không hợp lệ.");
+
+                proposal.SelectedSlot = slot;
+
+                var newBooking = new ConsultationSchedule
+                {
+                    PatientId = proposal.PatientId,
+                    CounselorId = proposal.CounselorId,
+                    ScheduledDate = slot.Date,
+                    TimeSlot = (TimeSlot)slot.TimeSlot,
+                    Status = ConsultationStatus.Pending,
+                    Notes = "[Đặt lại lịch từ đề xuất]",
+                    IsCanceled = false
+                };
+                _context.ConsultationSchedules.Add(newBooking);
+                await _context.SaveChangesAsync();
+
+                // Gửi email xác nhận cho cả hai
+                // ... (tùy ý)
+            }
+            else
+            {
+                // Ghi nhận từ chối, có thể gửi email thông báo
+            }
+
+            await _context.SaveChangesAsync();
+            return BaseResponse.Ok(null, req.Accept ? "Đã xác nhận lịch mới." : "Đã từ chối đề xuất.");
         }
     }
 }

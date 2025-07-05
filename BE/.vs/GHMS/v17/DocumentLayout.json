@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{9FF1C4C4-D3A1-462D-93C1-E1C3B742715F}|GHMS.Web\\GHMS.Web.csproj|solutionrelative:ghms.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\menstrualcycleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\menstrualcycleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|d:\\bao\\swp\\swp\\ghms\\be\\ghms.bll\\services\\consultationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0A9C0B38-0FFD-484C-B12E-A23CE0EBA492}|GHMS.BLL\\GHMS.BLL.csproj|solutionrelative:ghms.bll\\services\\consultationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 150,
-          "SelectedChildIndex": 20,
+          "SelectedChildIndex": 21,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,20 +106,33 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MenstrualCycleService.cs",
+              "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "RelativeDocumentMoniker": "GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "RelativeToolTip": "GHMS.BLL\\Services\\MenstrualCycleService.cs",
+              "ViewState": "AgIAANwAAAAAAAAAAAAAwBYBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T03:54:12.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Program.cs",
               "RelativeDocumentMoniker": "GHMS.Web\\Program.cs",
               "ToolTip": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.Web\\Program.cs",
               "RelativeToolTip": "GHMS.Web\\Program.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAkwIUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAgwKgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-03T12:17:28.334Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ConsultationService.cs",
               "DocumentMoniker": "D:\\Bao\\SWP\\SWP\\GHMS\\BE\\GHMS.BLL\\Services\\ConsultationService.cs",
               "RelativeDocumentMoniker": "GHMS.BLL\\Services\\ConsultationService.cs",
@@ -123,13 +140,12 @@
               "RelativeToolTip": "GHMS.BLL\\Services\\ConsultationService.cs",
               "ViewState": "AgIAAEgAAAAAAAAAAAAAwLYAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T12:15:10.813Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-03T12:15:10.813Z"
             }
           ]
         },
         {
-          "DockedWidth": 222,
+          "DockedWidth": 150,
           "SelectedChildIndex": -1,
           "Children": [
             {

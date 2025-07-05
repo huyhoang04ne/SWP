@@ -179,6 +179,38 @@
   },
   {
     "ContainingType": "GHMS.Web.Controllers.ConsultationController",
+    "Method": "ProposeReschedule",
+    "RelativePath": "api/Consultation/propose-reschedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "GHMS.Common.Req.RescheduleProposalReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.ConsultationController",
+    "Method": "RespondReschedule",
+    "RelativePath": "api/Consultation/respond-reschedule",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "GHMS.Common.Req.RespondRescheduleReq",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "GHMS.Web.Controllers.ConsultationController",
     "Method": "UpdateStatus",
     "RelativePath": "api/Consultation/update-status/{id}",
     "HttpMethod": "PUT",

@@ -20,6 +20,15 @@ namespace GHMS.BLL.Services
 
         public async Task AddPeriodEntryAsync(string userId, MenstrualCycleCreateReq req)
         {
+            // Validate input
+            if (req.PeriodDates == null || !req.PeriodDates.Any())
+                throw new ArgumentException("Danh sách ngày kinh không được để trống.");
+
+            // Validate không có ngày trùng lặp
+            var distinctDates = req.PeriodDates.Select(d => d.Date).Distinct().ToList();
+            if (distinctDates.Count != req.PeriodDates.Count)
+                throw new ArgumentException("Không được phép nhập ngày trùng lặp.");
+
             var currentDate = DateTime.UtcNow.AddHours(7).Date;
 
             var futureDates = req.PeriodDates.Where(d => d.Date > currentDate).ToList();
@@ -27,28 +36,59 @@ namespace GHMS.BLL.Services
                 throw new ArgumentException($"Không được phép nhập ngày trong tương lai. Các ngày không hợp lệ: {string.Join(", ", futureDates.Select(d => d.ToString("dd/MM/yyyy")))}");
 
             var groups = GroupConsecutivePeriodDays(req.PeriodDates.Select(d => d.Date).ToList());
-            var newStartDates = groups.Select(g => g.First().Date).ToHashSet();
+            
+            // Validate độ dài của mỗi kỳ kinh (3-7 ngày) và khoảng cách giữa các ngày
+            foreach (var group in groups)
+            {
+                // Validate độ dài kỳ kinh
+                if (group.Count < 3 || group.Count > 7)
+                {
+                    var startDate = group.First();
+                    var endDate = group.Last();
+                    throw new ArgumentException($"Kỳ kinh từ {startDate:dd/MM/yyyy} đến {endDate:dd/MM/yyyy} có độ dài {group.Count} ngày không hợp lệ. Độ dài kỳ kinh phải từ 3-7 ngày.");
+                }
+                
+                // Validate khoảng cách giữa các ngày trong cùng kỳ kinh (phải liên tiếp)
+                for (int i = 1; i < group.Count; i++)
+                {
+                    var gap = (group[i] - group[i - 1]).Days;
+                    if (gap > 1)
+                    {
+                        throw new ArgumentException($"Các ngày trong kỳ kinh phải liên tiếp. Có khoảng cách {gap} ngày giữa {group[i - 1]:dd/MM/yyyy} và {group[i]:dd/MM/yyyy}.");
+                    }
+                }
+            }
+
+            // Validate độ dài chu kỳ kinh nguyệt (21-35 ngày từ ngày đầu đến ngày đầu)
+            if (groups.Count >= 2)
+            {
+                for (int i = 0; i < groups.Count - 1; i++)
+                {
+                    var currentCycleStart = groups[i].First();
+                    var nextCycleStart = groups[i + 1].First();
+                    var cycleLength = (nextCycleStart - currentCycleStart).Days;
+                    
+                    if (cycleLength < 21 || cycleLength > 35)
+                    {
+                        throw new ArgumentException($"Chu kỳ kinh nguyệt từ {currentCycleStart:dd/MM/yyyy} đến {nextCycleStart:dd/MM/yyyy} có độ dài {cycleLength} ngày không hợp lệ. Độ dài chu kỳ phải từ 21-35 ngày.");
+                    }
+                }
+            }
 
             var oldCycles = await _context.MenstrualCycles
                 .Where(x => x.UserId == userId)
                 .Include(x => x.PeriodDays)
                 .ToListAsync();
-
-            var cyclesToDelete = oldCycles.Where(c => !newStartDates.Contains(c.StartDate.Date)).ToList();
-            foreach (var cycle in cyclesToDelete)
+            foreach (var cycle in oldCycles)
             {
                 _context.MenstrualPeriodDays.RemoveRange(cycle.PeriodDays);
                 _context.MenstrualCycles.Remove(cycle);
             }
-
             await _context.SaveChangesAsync();
 
             foreach (var group in groups)
             {
                 var start = group.First();
-
-                if (oldCycles.Any(c => c.StartDate.Date == start.Date))
-                    continue;
 
                 var cycle = new MenstrualCycle
                 {
@@ -88,7 +128,15 @@ namespace GHMS.BLL.Services
             {
                 if (i + 1 < userCycles.Count)
                 {
-                    userCycles[i].CycleLength = (userCycles[i + 1].StartDate - userCycles[i].StartDate).Days;
+                    var cycleLength = (userCycles[i + 1].StartDate - userCycles[i].StartDate).Days;
+                    
+                    // Validate độ dài chu kỳ (21-35 ngày)
+                    if (cycleLength < 21 || cycleLength > 35)
+                    {
+                        throw new ArgumentException($"Chu kỳ kinh nguyệt từ {userCycles[i].StartDate:dd/MM/yyyy} đến {userCycles[i + 1].StartDate:dd/MM/yyyy} có độ dài {cycleLength} ngày không hợp lệ. Độ dài chu kỳ phải từ 21-35 ngày.");
+                    }
+                    
+                    userCycles[i].CycleLength = cycleLength;
                 }
                 else
                 {
@@ -119,7 +167,11 @@ namespace GHMS.BLL.Services
                 }
             }
 
-            if (group.Any()) result.Add(group);
+            if (group.Any()) 
+            {
+                result.Add(group);
+            }
+            
             return result;
         }
 
@@ -168,9 +220,11 @@ namespace GHMS.BLL.Services
             var latest = cycles.First();
             int cycleLength = latest.CycleLength > 0 ? latest.CycleLength : PredictCycleLength(cycles);
 
-            var ovulation = latest.StartDate.AddDays(cycleLength / 2);
-            var fertileStart = ovulation.AddDays(-3);
-            var fertileEnd = ovulation.AddDays(3);
+            // Theo ACOG: Ngày rụng trứng = StartDate + (CycleLength - 14)
+            DateTime ovulation = latest.StartDate.AddDays(cycleLength - 14);
+            // Fertile window: ovulation - 5 đến ovulation + 1
+            DateTime fertileStart = ovulation.AddDays(-5);
+            DateTime fertileEnd = ovulation.AddDays(1);
 
             return new FertileWindowRsp
             {
@@ -216,9 +270,9 @@ namespace GHMS.BLL.Services
                 int predictedLength = current.CycleLength > 0 ? current.CycleLength : PredictCycleLength(cycles);
 
                 // Tính toán các trường bổ sung
-                var ovulation = current.StartDate.AddDays(predictedLength / 2);
-                var fertileStart = ovulation.AddDays(-3);
-                var fertileEnd = ovulation.AddDays(3);
+                var ovulation = current.StartDate.AddDays(predictedLength - 14);
+                var fertileStart = ovulation.AddDays(-5);
+                var fertileEnd = ovulation.AddDays(1);
                 string status = "Low";
                 var today = DateTime.UtcNow.Date;
                 if (today >= fertileStart.Date && today <= fertileEnd.Date)

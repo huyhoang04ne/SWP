@@ -18,6 +18,7 @@ namespace GHMS.DAL.Data
         public DbSet<MedicationReminder> MedicationReminders { get; set; }
         public DbSet<MedicationSchedule> MedicationSchedules { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<RescheduleProposal> RescheduleProposals { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -96,6 +97,20 @@ namespace GHMS.DAL.Data
                       .HasForeignKey(e => e.CounselorId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+
+            // Cấu hình 1-n: RescheduleProposal - ProposedSlots
+            modelBuilder.Entity<RescheduleProposal>()
+                .HasMany(rp => rp.ProposedSlots)
+                .WithOne(ps => ps.RescheduleProposal)
+                .HasForeignKey(ps => ps.RescheduleProposalId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Cấu hình 1-1: RescheduleProposal - SelectedSlot
+            modelBuilder.Entity<RescheduleProposal>()
+                .HasOne(rp => rp.SelectedSlot)
+                .WithMany()
+                .HasForeignKey(rp => rp.SelectedSlotId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
