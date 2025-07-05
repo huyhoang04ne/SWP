@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\assets",
+    "\\src\\components",
+    "\\src\\pages",
+    "\\src\\pages\\Home",
+    "\\src\\pages\\Login",
+    "\\src\\pages\\PeriodCalendar",
+    "\\src\\pages\\Register",
+    "\\src\\routers"
+  ],
+  "PreviewInSolutionExplorer": false
+}
