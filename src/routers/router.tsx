@@ -6,8 +6,8 @@ import CycleSummary from "../pages/CycleTracking/CycleSummary";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AuthPage from "../pages/Auth/AuthPage";
 import MedicationReminderPage from "../pages/MedicationReminderPage";
-import Consaultant from "../pages/consaultant/consaultant"; // 👈 nếu bạn đổi tên thành Consultant, nhớ sửa lại
-import Pricing from "../pages/Pricing/Pricing"; // 👈 Trang bảng giá
+import Consaultant from "../pages/consaultant/consaultant"; 
+import Pricing from "../pages/Pricing/Pricing"; 
 
 const routers = createBrowserRouter([
   {

@@ -112,10 +112,19 @@ const Pricing = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10 text-[15px] leading-relaxed">
       <h1 className="text-4xl font-extrabold text-purple-800 mb-6">Bảng giá dịch vụ GenderCare</h1>
+      <div className="w-[120px] h-[3px] bg-purple-800 mb-6"></div>
 
-      <div className="w-[120px] h-[3px] bg-purple-800 mb-4"></div>
-      <p className="text-gray-700 mb-6">
-        Bảng giá dịch vụ xét nghiệm các bệnh lây truyền qua đường tình dục (STIs) tại GenderCare được cập nhật thường xuyên, minh bạch và rõ ràng trên toàn hệ thống. Mọi thông tin đều được bảo mật tuyệt đối và tuân thủ theo tiêu chuẩn y tế quốc tế.
+      <h2 className="text-2xl font-bold text-purple-800 mb-3">Các dịch vụ xét nghiệm tại GenderCare</h2>
+      <ul className="list-disc ml-6 text-gray-700 space-y-1 mb-6">
+        <li>Xét nghiệm lẻ tất cả các loại.</li>
+        <li>Gói xét nghiệm theo độ tuổi hoặc nhu cầu cá nhân hoá.</li>
+        <li>Đặt giữ lịch xét nghiệm theo yêu cầu.</li>
+        <li>Hỗ trợ xét nghiệm theo nhóm, cơ quan hoặc tổ chức.</li>
+      </ul>
+
+      <h2 className="text-2xl font-bold text-purple-800 mb-3">Dịch vụ xét nghiệm lẻ</h2>
+      <p className="mb-6 text-gray-700">
+        GenderCare là hệ thống cung cấp đầy đủ các loại xét nghiệm cho người lớn và trẻ em, kể cả các loại thường khan hiếm. Với mức giá ổn định, dịch vụ chuyên nghiệp, khách hàng hoàn toàn yên tâm về chất lượng. GenderCare hợp tác cùng các trung tâm, phòng xét nghiệm và nhà cung cấp uy tín trong và ngoài nước nhằm đảm bảo độ chính xác và an toàn cao nhất cho khách hàng.
       </p>
 
       <div className="overflow-x-auto shadow border rounded-lg mb-6">
@@ -147,36 +156,47 @@ const Pricing = () => {
 
       <p className="italic text-sm text-gray-600 mb-4">
         (*) Để kiểm tra tình trạng gói xét nghiệm, xin vui lòng liên hệ Hotline <strong>039.204.2850</strong>.
-      </p>
+      </p> 
+      
+          <img
+       src="/Images/stls.jpg"
+  alt="Phòng xét nghiệm hiện đại"
+  className="w-full max-w-3xl rounded-md shadow-md mx-auto mb-2"
+/>
 
-      <div className="space-y-4 text-[16px] text-gray-800">
-        <p><strong>1. Bảng giá áp dụng trên toàn hệ thống GenderCare từ ngày 01/04/2025</strong></p>
+      <h2 className="text-2xl font-bold text-purple-800 mt-10 mb-4">Dịch vụ Tiêm Chủng và Tư Vấn Lưu Động</h2>
+      <p className="mb-4">GenderCare mang đến dịch vụ tiêm chủng và tư vấn lưu động toàn diện, hỗ trợ tổ chức tiêm tại nhà hoặc tại cơ quan dành cho cá nhân, tổ chức, doanh nghiệp, trường học... Chúng tôi xây dựng quy trình khoa học, đảm bảo y tế và tiết kiệm thời gian tối đa.</p>
+      <p className="mb-4">Đội ngũ y bác sĩ chuyên môn cao, quy trình tiêm nhanh chóng, bảo mật thông tin tuyệt đối. Các chương trình hỗ trợ được cá nhân hóa theo từng nhóm đối tượng để tối ưu hiệu quả phòng bệnh và quản lý sức khỏe.</p>
 
-        <p>
-          <strong>2. Giá dịch vụ tại GenderCare đã bao gồm:</strong> tư vấn trước và sau xét nghiệm, bảo mật thông tin khách hàng tuyệt đối, hỗ trợ chăm sóc từ xa qua tổng đài và nền tảng online, in kết quả miễn phí, không thu thêm phụ phí nếu có phản ứng hoặc tái khám trong vòng 7 ngày.
-        </p>
+      <h2 className="text-2xl font-bold text-purple-800 mt-10 mb-4">Các Hình Thức Thanh Toán tại GenderCare</h2>
+      <p className="mb-4">GenderCare áp dụng nhiều hình thức thanh toán linh hoạt giúp khách hàng dễ dàng sử dụng dịch vụ mà không lo ngại vấn đề tài chính:</p>
+      <ul className="list-disc ml-6 mb-4">
+        <li>Thanh toán bằng tiền mặt tại cơ sở</li>
+        <li>Quẹt thẻ ATM, Visa, MasterCard qua máy POS</li>
+        <li>Sử dụng ví điện tử: Momo, ZaloPay, VNPAY, Apple Pay,...</li>
+        <li>Thanh toán trả góp qua đối tác tài chính như MCredit không lãi suất</li>
+        <li>Thanh toán trực tuyến qua website GenderCare</li>
+      </ul>
+      <p className="mb-4">Mọi thông tin thanh toán đều được xác minh an toàn và minh bạch, đảm bảo trải nghiệm nhanh chóng – thuận tiện.</p>
 
-        <p>
-          <strong>3. GenderCare miễn phí giữ lịch và kết quả trong 5 tuần</strong> kể từ ngày xét nghiệm, khách hàng có thể đặt hẹn lại mà không phải xét nghiệm lại, trừ khi có thay đổi chỉ định từ bác sĩ chuyên môn.
-        </p>
+      <h2 className="text-2xl font-bold text-purple-800 mt-10 mb-4">Gói Tiêm Chủng Trả Góp – Không Lãi Suất</h2>
+      <p className="mb-4">GenderCare triển khai chương trình trả góp 0% lãi suất dành cho các gói tiêm chủng có giá trị từ 3.000.000 VND trở lên. Kỳ hạn linh hoạt 6 đến 12 tháng, giúp khách hàng dễ dàng tiếp cận dịch vụ mà không cần thanh toán một lần.</p>
+      <p className="mb-4">Chương trình áp dụng với thủ tục đơn giản, phê duyệt nhanh, không yêu cầu chứng minh tài chính phức tạp. Đây là giải pháp tài chính y tế hiệu quả cho gia đình và cá nhân có kế hoạch tiêm chủng dài hạn.</p>
 
-        <p>
-          <strong>4. GenderCare miễn phí lưu trữ dữ liệu và đồng bộ đa nền tảng:</strong> khách hàng có thể tra cứu kết quả qua app, email, hoặc trực tiếp tại cơ sở bất kỳ trong hệ thống.
-        </p>
+      <h2 className="text-2xl font-bold text-purple-800 mt-10 mb-4">Một Số Gói Dịch Vụ Tiêu Biểu</h2>
+      <ul className="list-disc ml-6 mb-4">
+        <li>Gói tầm soát sức khỏe toàn diện định kỳ</li>
+        <li>Gói tiêm phòng HPV, viêm gan B, uốn ván</li>
+        <li>Gói dành cho phụ nữ chuẩn bị mang thai và sau sinh</li>
+        <li>Gói xét nghiệm cho người có nguy cơ cao (STI, HIV, Chlamydia...)</li>
+        <li>Gói tiêm chủng cho người lớn tuổi và người mắc bệnh nền</li>
+      </ul>
 
-        <div>
-          <p><strong>5. Các tiện ích kèm theo khi sử dụng dịch vụ tại GenderCare:</strong></p>
-          <ul className="list-disc ml-6 mt-2 space-y-1">
-            <li>Miễn phí wifi, nước uống, phòng đợi riêng tư</li>
-            <li>Hệ thống tiếp đón thân thiện, không phân biệt đối tượng</li>
-            <li>Không gian tư vấn riêng đảm bảo kín đáo và tâm lý thoải mái</li>
-            <li>Dịch vụ chăm sóc cá nhân: nhắc lịch xét nghiệm định kỳ, hỗ trợ gọi điện tư vấn sức khỏe</li>
-            <li>Miễn phí gửi xe tại tất cả các cơ sở</li>
-            <li>Khách hàng có thể đăng ký kiểm tra thêm các bệnh khác như viêm gan, Chlamydia, HPV...</li>
-            <li>Lưu trữ hồ sơ và kết quả xét nghiệm trọn đời hoàn toàn miễn phí</li>
-          </ul>
-        </div>
-      </div>
+      <h2 className="text-2xl font-bold text-purple-800 mt-10 mb-4">Hỗ Trợ & Tư Vấn</h2>
+      <p className="mb-2">GenderCare phục vụ tất cả các ngày trong tuần từ 7h30 - 17h30, kể cả thứ Bảy, Chủ nhật và ngày lễ. Đội ngũ tổng đài viên và bác sĩ tư vấn luôn sẵn sàng hỗ trợ giải đáp mọi thắc mắc.</p>
+      <p className="mb-2">• Hotline hỗ trợ: <strong>028.7102.6595</strong></p>
+      <p className="mb-2">• Inbox fanpage chính thức của GenderCare để được phản hồi nhanh</p>
+      <p className="mb-2">• Hệ thống nhắc lịch và hỗ trợ theo dõi kết quả xét nghiệm được tích hợp qua App và Email cá nhân</p>
     </div>
   );
 };
