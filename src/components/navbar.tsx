@@ -27,6 +27,11 @@ const Navbar = () => {
     location.pathname.startsWith("/dich-vu") ||
     location.pathname.startsWith("/medication-reminder");
 
+  const isInCamNang =
+    location.pathname.startsWith("/cam-nang/luu-y-truoc") ||
+    location.pathname.startsWith("/cam-nang/luu-y-sau") ||
+    location.pathname.startsWith("/cam-nang/faq");
+
   return (
     <nav className="bg-purple-100 border-t border-b border-purple-200 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
@@ -61,9 +66,7 @@ const Navbar = () => {
             <div
               onClick={() => toggleDropdown("dich-vu")}
               className={`px-4 py-1 rounded-md cursor-pointer inline-flex items-center ${
-                isInDichVu
-                  ? "bg-purple-600 text-white"
-                  : "hover:text-purple-600"
+                isInDichVu ? "bg-purple-600 text-white" : "hover:text-purple-600"
               }`}
             >
               <span>Dịch vụ</span>
@@ -96,7 +99,7 @@ const Navbar = () => {
                   >
                     Chu kỳ kinh nguyệt
                   </Link>
-                    <Link
+                  <Link
                     to="/cycle-tracking"
                     className={`block px-4 py-2 text-sm ${
                       location.pathname === "/cycle-tracking"
@@ -122,21 +125,73 @@ const Navbar = () => {
                   </Link>
                 </li>
               </ul>
-            
             )}
           </li>
 
-          <li>
-            <Link
-              to="/cam-nang"
-              className={`px-4 py-1 rounded-md ${
-                location.pathname === "/cam-nang"
+          <li className="relative">
+            <div
+              onClick={() => toggleDropdown("cam-nang")}
+              className={`px-4 py-1 rounded-md cursor-pointer inline-flex items-center ${
+                isInCamNang
                   ? "bg-purple-600 text-white"
                   : "hover:text-purple-600"
               }`}
             >
-              Cẩm nang
-            </Link>
+              <span>Cẩm nang</span>
+              <svg
+                className="ml-1 w-3 h-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+            {openDropdown === "cam-nang" && (
+              <ul className="absolute left-0 mt-2 w-64 bg-white border border-purple-200 rounded-md shadow-lg z-10">
+                <li>
+                  <Link
+                    to="/cam-nang/luu-y-truoc"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/cam-nang/luu-y-truoc"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Lưu ý trước xét nghiệm
+                  </Link>
+                  <Link
+                    to="/cam-nang/luu-y-sau"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/cam-nang/luu-y-sau"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Lưu ý sau xét nghiệm
+                  </Link>
+                  <Link
+                    to="/cam-nang/faq"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/cam-nang/faq"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Các câu hỏi thường gặp
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
 
           <li>
