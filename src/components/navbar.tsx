@@ -32,6 +32,8 @@ const Navbar = () => {
     location.pathname.startsWith("/cam-nang/luu-y-sau") ||
     location.pathname.startsWith("/cam-nang/faq");
 
+  const isInGioiThieu = location.pathname.startsWith("/gioi-thieu");
+
   return (
     <nav className="bg-purple-100 border-t border-b border-purple-200 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
@@ -49,19 +51,78 @@ const Navbar = () => {
             </Link>
           </li>
 
-          <li>
-            <Link
-              to="/gioi-thieu"
-              className={`px-4 py-1 rounded-md ${
-                location.pathname === "/gioi-thieu"
+          {/* Giới thiệu */}
+          <li className="relative">
+            <div
+              onClick={() => toggleDropdown("gioi-thieu")}
+              className={`px-4 py-1 rounded-md cursor-pointer inline-flex items-center ${
+                isInGioiThieu
                   ? "bg-purple-600 text-white"
                   : "hover:text-purple-600"
               }`}
             >
-              Giới thiệu
-            </Link>
+              <span>Giới thiệu</span>
+              <svg
+                className="ml-1 w-3 h-3"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+            {openDropdown === "gioi-thieu" && (
+              <ul className="absolute left-0 mt-2 w-64 bg-white border border-purple-200 rounded-md shadow-lg z-10">
+                <li>
+                  <Link
+                    to="/gioi-thieu/he-thong"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/gioi-thieu/he-thong"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Hệ thống GenderCare
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/gioi-thieu/doi-ngu"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/gioi-thieu/doi-ngu"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Đội ngũ chuyên gia
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/gioi-thieu/tuyen-dung"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/gioi-thieu/tuyen-dung"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Tuyển dụng
+                  </Link>
+                </li>
+              </ul>
+            )}
           </li>
 
+          {/* Dịch vụ */}
           <li className="relative">
             <div
               onClick={() => toggleDropdown("dich-vu")}
@@ -100,15 +161,15 @@ const Navbar = () => {
                     Chu kỳ kinh nguyệt
                   </Link>
                   <Link
-                    to="/cycle-tracking"
+                    to="/consultant"
                     className={`block px-4 py-2 text-sm ${
-                      location.pathname === "/cycle-tracking"
+                      location.pathname === "/consultant"
                         ? "bg-purple-100 font-bold text-purple-800"
                         : "text-purple-700 hover:bg-purple-100"
                     }`}
                     onClick={() => setOpenDropdown(null)}
                   >
-                    Tư Vấn
+                    Tư vấn
                   </Link>
                 </li>
                 <li>
@@ -128,6 +189,7 @@ const Navbar = () => {
             )}
           </li>
 
+          {/* Cẩm nang */}
           <li className="relative">
             <div
               onClick={() => toggleDropdown("cam-nang")}
@@ -183,6 +245,7 @@ const Navbar = () => {
             )}
           </li>
 
+          {/* Các menu khác */}
           <li>
             <Link
               to="/bang-gia"
@@ -195,7 +258,6 @@ const Navbar = () => {
               Bảng giá
             </Link>
           </li>
-
           <li>
             <Link
               to="/benh-hoc"
@@ -208,7 +270,6 @@ const Navbar = () => {
               Bệnh học
             </Link>
           </li>
-
           <li>
             <Link
               to="/tin-tuc"
@@ -223,6 +284,7 @@ const Navbar = () => {
           </li>
         </ul>
 
+        {/* User section */}
         <div className="flex space-x-4 items-center">
           <button
             title="Thông báo"
