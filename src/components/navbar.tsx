@@ -178,17 +178,6 @@ const Navbar = () => {
                   >
                     Lưu ý sau xét nghiệm
                   </Link>
-                  <Link
-                    to="/cam-nang/faq"
-                    className={`block px-4 py-2 text-sm ${
-                      location.pathname === "/cam-nang/faq"
-                        ? "bg-purple-100 font-bold text-purple-800"
-                        : "text-purple-700 hover:bg-purple-100"
-                    }`}
-                    onClick={() => setOpenDropdown(null)}
-                  >
-                    Các câu hỏi thường gặp
-                  </Link>
                 </li>
               </ul>
             )}

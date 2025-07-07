@@ -6,16 +6,10 @@ import CycleSummary from "../pages/CycleTracking/CycleSummary";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AuthPage from "../pages/Auth/AuthPage";
 import MedicationReminderPage from "../pages/MedicationReminderPage";
-
-// 🔧 Nếu tên thư mục đúng là `consaultant` thì để nguyên, nếu sai chính tả thì sửa thành:
 import Consultant from "../pages/consaultant/consaultant";
-
 import Pricing from "../pages/Pricing/Pricing";
-
-// ✅ Các file Cẩm nang
 import LuuYTruoc from "../pages/handbook/LuuYTruoc";
 import LuuYSau from "../pages/handbook/LuuYSau";
-import CauHoiThuongGap from "../pages/handbook/CauHoiThuongGap";
 
 const routers = createBrowserRouter([
   {
@@ -67,10 +61,6 @@ const routers = createBrowserRouter([
       {
         path: "cam-nang/luu-y-sau",
         element: <LuuYSau />,
-      },
-      {
-        path: "cam-nang/faq",
-        element: <CauHoiThuongGap />,
       },
     ],
   },
