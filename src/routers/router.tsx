@@ -10,6 +10,9 @@ import Consultant from "../pages/consaultant/consaultant";
 import Pricing from "../pages/Pricing/Pricing";
 import LuuYTruoc from "../pages/handbook/LuuYTruoc";
 import LuuYSau from "../pages/handbook/LuuYSau";
+import GenderCare from "../pages/AboutUs/GenderCare";
+import OurMedicalTeam from "../pages/AboutUs/OurMedicalTeam";
+import Recruitment from "../pages/AboutUs/Recruitment";
 
 const routers = createBrowserRouter([
   {
@@ -61,6 +64,19 @@ const routers = createBrowserRouter([
       {
         path: "cam-nang/luu-y-sau",
         element: <LuuYSau />,
+      },
+       // ✅ Các route cho about us
+      {
+        path: "gioi-thieu/he-thong-gendercare",
+        element: <GenderCare />,
+      },
+      {
+        path: "gioi-thieu/doi-ngu-chuyen-gia",
+        element: <OurMedicalTeam />,
+      },
+        {
+        path: "gioi-thieu/tuyen-dung",
+        element: <Recruitment/>,
       },
     ],
   },
