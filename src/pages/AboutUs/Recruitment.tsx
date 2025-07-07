@@ -6,6 +6,8 @@ const Recruitment = () => {
       <h1 className="text-3xl font-extrabold text-purple-700 mb-6">
         Tuyển dụng tại GenderCare
       </h1>
+      <div className="w-[400px] h-[3px] bg-purple-800 mb-6"></div>
+      <img src="/Images/tuyendung.jpg" alt="tuyển dụng" className="w-full max-w-2xl rounded-md shadow-md mx-auto mt-6" />
       <p className="text-gray-800 leading-relaxed mb-4 text-[15px]">
         Tại <strong>GenderCare</strong>, chúng tôi tin rằng đội ngũ nhân sự chính là yếu tố cốt lõi để mang đến dịch vụ chăm sóc sức khỏe chất lượng, chuyên nghiệp và nhân văn. Chúng tôi luôn tìm kiếm những ứng viên có tâm huyết, năng lực chuyên môn cao và mong muốn đóng góp cho cộng đồng trong lĩnh vực sức khỏe giới tính và phòng chống bệnh lây truyền qua đường tình dục (STI).
       </p>
