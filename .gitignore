@@ -1,18 +1,17 @@
-# Backend build folders
+# Ignore VS build folders
 BE/**/bin/
 BE/**/obj/
+BE/**/.vs/
 
-# Visual Studio
-.vs/
+# Ignore VS Code workspace
+BE/**/.vscode/
+
+# Ignore temporary or cache files
+BE/**/*.db
+BE/**/*.vsidx
+BE/**/*.v2
+BE/**/DesignTimeBuild/
+
+# Optional: Ignore user-specific files
 *.user
 *.suo
-
-# DLL, exe, cache
-*.dll
-*.exe
-*.pdb
-*.cache
-
-# Node modules & frontend build
-FE/node_modules/
-FE/build/

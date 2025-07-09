@@ -49,6 +49,7 @@ builder.Services.AddScoped<ScheduleService>();
 builder.Services.AddScoped<NotificationService>();
 builder.Services.AddSingleton<GHMS.Common.Config.NotificationTemplateSettings>();
 builder.Services.AddScoped<NotifyUpcomingEventsJob>();
+builder.Services.AddScoped<ConsultationReminderJob>();
 
 // 🔁 5. Hangfire setup
 builder.Services.AddHangfire(config =>
@@ -150,6 +151,16 @@ RecurringJob.AddOrUpdate<NotifyUpcomingEventsJob>(
     "notify-upcoming-events",
     job => job.RunAsync(),
     Cron.Daily(),
+    new RecurringJobOptions
+    {
+        TimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time")
+    }
+);
+
+RecurringJob.AddOrUpdate<ConsultationReminderJob>(
+    "consultation-reminder-job",
+    job => job.RunAsync(),
+    "*/10 * * * *", // chạy mỗi 10 phút, hoặc tuỳ chỉnh
     new RecurringJobOptions
     {
         TimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time")

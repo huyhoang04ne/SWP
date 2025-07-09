@@ -1,8 +1,7 @@
-﻿using GHMS.DAL.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+using GHMS.DAL.Models;
 using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace GHMS.DAL.Data
 {
@@ -19,6 +18,7 @@ namespace GHMS.DAL.Data
         public DbSet<MedicationSchedule> MedicationSchedules { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<RescheduleProposal> RescheduleProposals { get; set; }
+        public DbSet<ConsultationReminder> ConsultationReminders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
