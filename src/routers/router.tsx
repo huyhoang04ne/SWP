@@ -13,7 +13,7 @@ import LuuYSau from "../pages/handbook/LuuYSau";
 import GenderCare from "../pages/AboutUs/GenderCare";
 import OurMedicalTeam from "../pages/AboutUs/OurMedicalTeam";
 import Recruitment from "../pages/AboutUs/Recruitment";
-
+import Pathology from "../pages/Pathology/Pathology";
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -77,6 +77,11 @@ const routers = createBrowserRouter([
         {
         path: "gioi-thieu/tuyen-dung",
         element: <Recruitment/>,
+      },
+      // router cho Pathology
+      {
+        path: "Pathology",
+        element: <Pathology />,
       },
     ],
   },
