@@ -28,5 +28,10 @@ namespace GHMS.Common.Config
         public string RescheduleProposalSubject { get; set; } = "Tư vấn viên đề xuất đổi lịch tư vấn";
         public string RescheduleProposalBody { get; set; } =
             "<h3>Xin chào {0},</h3><p>Lịch tư vấn với tư vấn viên <b>{1}</b> đã bị huỷ.<br>Lý do: {2}</p><p>Tư vấn viên đề xuất các khung giờ sau:<br>{3}</p><p>Vui lòng chọn một khung giờ phù hợp hoặc từ chối đề xuất này trên hệ thống.</p>";
+
+        // Thông báo vắng mặt
+        public string NoShowSubject { get; set; } = "Thông báo vắng mặt buổi tư vấn";
+        public string NoShowBody { get; set; } =
+            "<h3>Xin chào {0},</h3><p>Bạn đã vắng mặt buổi tư vấn với tư vấn viên <b>{1}</b> vào lúc <b>{2:HH:mm dd/MM/yyyy}</b>.</p><p>Vui lòng liên hệ với chúng tôi để sắp xếp lịch tư vấn mới hoặc hủy lịch nếu cần thiết.</p><p>Lưu ý: Việc vắng mặt có thể ảnh hưởng đến quyền đặt lịch tư vấn trong tương lai.</p>";
     }
 }

@@ -25,6 +25,10 @@ namespace GHMS.DAL.Models
         [Required]
         public TimeSlot TimeSlot { get; set; }
 
+        // Giờ bắt đầu và kết thúc của ca làm việc
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+
         public bool IsAvailable { get; set; } = true;
 
         public string? Notes { get; set; }

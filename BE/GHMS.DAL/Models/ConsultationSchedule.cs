@@ -14,7 +14,8 @@ namespace GHMS.DAL.Models
         Pending,
         Confirmed,
         Completed,
-        Cancelled
+        Cancelled,
+        NoShow
     }
 
     public enum TimeSlot

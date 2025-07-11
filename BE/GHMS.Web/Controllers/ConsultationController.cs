@@ -59,13 +59,16 @@ namespace GHMS.Web.Controllers
 
         [Authorize(Roles = "Counselor")]
         [HttpGet("my-appointments")]
-        public async Task<IActionResult> GetMyAppointments()
+        public async Task<IActionResult> GetMyAppointments(
+            [FromQuery] DateTime? fromDate,
+            [FromQuery] DateTime? toDate,
+            [FromQuery] ConsultationStatus? status)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized();
 
-            var res = await _service.GetAppointmentsByCounselorAsync(userId);
+            var res = await _service.GetAppointmentsByCounselorWithFilterAsync(userId, fromDate, toDate, status);
             return Ok(res);
         }
 
@@ -98,6 +101,30 @@ namespace GHMS.Web.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var res = await _service.RespondRescheduleAsync(userId, req);
             return res.Success ? Ok(res) : BadRequest(res);
+        }
+
+        [Authorize(Roles = "Counselor")]
+        [HttpPost("mark-no-show/{id}")]
+        public async Task<IActionResult> MarkPatientNoShow(int id)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var res = await _service.MarkPatientNoShowAsync(id, userId);
+            return res.Success ? Ok(res) : BadRequest(res);
+        }
+
+        [Authorize(Roles = "Counselor")]
+        [HttpGet("no-show-candidates")]
+        public async Task<IActionResult> GetNoShowCandidates()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var consultations = await _service.GetConsultationsForNoShowCheckAsync(userId);
+            return Ok(consultations);
         }
     }
 }
