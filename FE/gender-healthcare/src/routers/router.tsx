@@ -5,7 +5,7 @@ import PeriodCalendarPage from "../pages/PeriodCalendar/PeriodCalendarPage";
 import CycleSummary from "../pages/CycleTracking/CycleSummary";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AuthPage from "../pages/Auth/AuthPage";
-import MedicationReminderPage from '../pages/MedicationReminderPage';
+import MedicationReminderPage from '../pages/MedicationReminder/MedicationReminderPage';
 
 const routers = createBrowserRouter([
   {

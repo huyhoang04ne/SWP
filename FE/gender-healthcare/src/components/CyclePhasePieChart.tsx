@@ -14,15 +14,16 @@ interface CyclePhasePieChartProps {
 }
 
 const CyclePhasePieChart: React.FC<CyclePhasePieChartProps> = ({ prediction }) => {
-  // Lấy số ngày chu kỳ thực tế, mặc định 28 nếu không có
-  const cycleLength = prediction?.cycleLength || 28;
+  const fertileStart = new Date(prediction?.fertileStart);
+  const fertileEnd = new Date(prediction?.fertileEnd);
+  const fertileDays = (fertileStart && fertileEnd && !isNaN(fertileStart.getTime()) && !isNaN(fertileEnd.getTime()))
+    ? Math.round((fertileEnd.getTime() - fertileStart.getTime()) / (1000 * 60 * 60 * 24)) + 1
+    : 7; // fallback nếu thiếu dữ liệu
 
-  // Tính toán các giai đoạn dựa trên cycleLength
-  const periodDays = 5; // Ngày có kinh (có thể lấy từ prediction nếu backend trả về)
+  const periodDays = prediction?.periodLength;
   const ovulationDays = 1;
-  const fertileDays = 7;
   const lutealDays = 6;
-  // Giai đoạn nang noãn = cycleLength - (periodDays + ovulationDays + fertileDays + lutealDays)
+  const cycleLength = prediction?.cycleLength || 28;
   const follicularDays = Math.max(cycleLength - (periodDays + ovulationDays + fertileDays + lutealDays), 0);
 
   const data = {

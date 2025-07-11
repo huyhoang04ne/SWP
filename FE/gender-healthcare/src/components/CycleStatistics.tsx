@@ -20,7 +20,7 @@ const CycleStatistics: React.FC<CycleStatisticsProps> = ({ prediction, predictio
   };
 
   const calculateDaysLeft = () => {
-    let nextDateStr = prediction.nextPeriodDate;
+    let nextDateStr = prediction.predictedNextCycleStartDate;
     if (!nextDateStr && Array.isArray(predictions)) {
       // Sort predictions theo startDate tăng dần
       const sortedPredictions = [...predictions].sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
@@ -81,10 +81,10 @@ const CycleStatistics: React.FC<CycleStatisticsProps> = ({ prediction, predictio
     today.setHours(0,0,0,0);
 
     // Lấy các mốc từ prediction
-    const startDate = new Date(prediction.startDate || prediction.StartDate);
+    const startDate = new Date(prediction.startDate);
     startDate.setHours(0,0,0,0);
-    const periodLength = prediction.periodLength || prediction.periodDays || 5;
-    const cycleLength = prediction.cycleLength || prediction.CycleLength || 28;
+    const periodLength = prediction.periodLength;
+    const cycleLength = prediction.cycleLength || 28;
     const fertileStart = prediction.fertileStart ? new Date(prediction.fertileStart) : null;
     const fertileEnd = prediction.fertileEnd ? new Date(prediction.fertileEnd) : null;
     const ovulationDate = prediction.ovulationDate ? new Date(prediction.ovulationDate) : null;
@@ -107,7 +107,19 @@ const CycleStatistics: React.FC<CycleStatisticsProps> = ({ prediction, predictio
     return "Giai đoạn hoàng thể";
   };
 
-  console.log("Kỳ kinh tiếp theo:", prediction.nextPeriodDate);
+  // Tính số ngày vùng màu mỡ an toàn
+  let fertileDays = 7;
+  if (prediction.fertileStart && prediction.fertileEnd) {
+    const fertileStart = new Date(prediction.fertileStart);
+    const fertileEnd = new Date(prediction.fertileEnd);
+    if (!isNaN(fertileStart.getTime()) && !isNaN(fertileEnd.getTime())) {
+      fertileDays = Math.round((fertileEnd.getTime() - fertileStart.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+    }
+  }
+
+  console.log("Kỳ kinh tiếp theo:", prediction.predictedNextCycleStartDate);
+  // Debug: kiểm tra giá trị periodLength/periodDays
+  console.log('CycleStatistics prediction:', prediction);
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -151,7 +163,7 @@ const CycleStatistics: React.FC<CycleStatisticsProps> = ({ prediction, predictio
           <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 rounded-lg">
             <h4 className="font-semibold text-yellow-700 mb-2">Vùng màu mỡ</h4>
             <p className="text-lg font-bold text-yellow-800">
-              {formatDate(prediction.fertileStart)}
+              {`${fertileDays} ngày (${formatDate(prediction.fertileStart)} - ${formatDate(prediction.fertileEnd)})`}
             </p>
             <p className="text-sm text-yellow-600">Bắt đầu</p>
           </div>

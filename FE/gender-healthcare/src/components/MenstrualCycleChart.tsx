@@ -56,7 +56,7 @@ const MenstrualCycleChart: React.FC<MenstrualCycleChartProps> = ({ predictions }
     const dayMap: Record<string, { cycleDay: number, period: number, fertile: number, ovulation: number }> = {};
     predictions.forEach(prediction => {
       if (!prediction.startDate || isNaN(new Date(prediction.startDate).getTime())) return;
-      const periodLen = prediction.periodLength || prediction.periodDays || 5;
+      const periodLen = prediction.periodLength;
       for (let i = 0; i < prediction.cycleLength; i++) {
         const d = new Date(prediction.startDate);
         d.setDate(d.getDate() + i);
@@ -294,7 +294,7 @@ const MenstrualCycleChart: React.FC<MenstrualCycleChartProps> = ({ predictions }
             </div>
             <div className="flex items-center">
               <div className="w-4 h-4 bg-blue-500 rounded mr-2"></div>
-              <span>Ngày có kinh (5 ngày)</span>
+              <span>Ngày có kinh ({currentPrediction.periodLength} ngày)</span>
             </div>
           </div>
           <div className="space-y-1">
