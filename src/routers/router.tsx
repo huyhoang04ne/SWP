@@ -45,11 +45,9 @@ const routers = createBrowserRouter([
       },
       {
         path: "consultant",
-        element: (
-          <ProtectedRoute>
-            <Consultant />
-          </ProtectedRoute>
-        ),
+       element: <Consultant/>,
+          
+      
       },
       {
         path: "pricing",
@@ -94,6 +92,8 @@ const routers = createBrowserRouter([
     path: "/login",
     element: <AuthPage />,
   },
+  
+ 
   {
     path: "/medication-reminder",
     element: (

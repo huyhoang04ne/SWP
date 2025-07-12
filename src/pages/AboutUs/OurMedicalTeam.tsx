@@ -38,10 +38,10 @@ const experts = [
     }
   },
   {
-    name: "ThS Nguyễn Tấn Đạt",
+    name: "ThS Nguyễn Thị Nhã",
     title: "Tư vấn viên phụ khoa",
     description: "Tư vấn sức khỏe giới tính nữ",
-    image: "/Images/tuvanvien5.jpg",
+    image: "/Images/Bacsin.jpg",
     profile: {
       introduction: "Chuyên gia về chăm sóc sức khỏe giới tính nữ, từ giáo dục giới tính đến phòng ngừa bệnh lý phụ khoa cho phụ nữ trẻ.",
       experience: "- Tư vấn viên sức khỏe sinh sản nữ tại GenderCare\n- Tổ chức hơn 50 buổi hội thảo sức khỏe cho học sinh, sinh viên\n- Cộng tác viên tại các chương trình giáo dục tình dục an toàn",
@@ -62,10 +62,10 @@ const experts = [
     }
   },
   {
-    name: "ThS.BS Hoàng Nguyễn Việt Hùng",
+    name: "ThS.BS Dương Tuấn Kiệt",
     title: "Bác sĩ Sản Phụ khoa",
     description: "Tư vấn & điều trị các vấn đề sức khỏe sinh sản cho phụ nữ",
-    image: "/Images/bacsi5.jpg",
+    image: "/Images/Bacsikit.jpg",
     profile: {
       introduction: "Bác sĩ sản phụ khoa nhiều năm kinh nghiệm, tập trung vào chăm sóc sức khỏe sinh sản, phòng ngừa và điều trị các bệnh lý phụ khoa.",
       experience: "- Bác sĩ trưởng khoa Sản tại bệnh viện Đa khoa GenderCare\n- 12 năm khám chữa bệnh sản khoa\n- Giảng viên Sản khoa tại Đại học Y Dược TP.HCM",
@@ -159,6 +159,7 @@ const OurMedicalTeam = () => {
             >
               ✖
             </button>
+            
             <img
               src={selectedExpert.image}
               alt={selectedExpert.name}
