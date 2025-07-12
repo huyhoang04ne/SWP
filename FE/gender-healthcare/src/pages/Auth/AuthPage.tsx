@@ -27,9 +27,16 @@ const AuthPage = () => {
     try {
       if (isSignIn) {
         const res = await login({ email, password });
-        if (res.data && res.data.token) {
+        if (res.data && res.data.token && res.data.user) {
           localStorage.setItem('token', res.data.token);
-          window.location.href = '/';
+          localStorage.setItem('user', JSON.stringify(res.data.user));
+          if (res.data.user.role === 'Manager') {
+            window.location.href = '/manager';
+          } else if (res.data.user.role === 'Counselor') {
+            window.location.href = '/counselor';
+          } else {
+            window.location.href = '/';
+          }
         } else {
           setError('Đăng nhập thất bại.');
         }

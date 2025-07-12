@@ -114,7 +114,7 @@ const CycleSummary: React.FC = () => {
           </li>
         </ul>
         <div className="text-xs text-blue-600 mt-2">
-          <b>Nguồn tham khảo:</b> <a href="https://www.acog.org/womens-health/faqs/your-menstrual-cycle" target="_blank" rel="noopener noreferrer" className="underline">ACOG - Your Menstrual Cycle</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3131874/" target="_blank" rel="noopener noreferrer" className="underline">Nghiên cứu về tuổi thọ tinh trùng và trứng</a>
+          <b>Nguồn tham khảo:</b> <a href="https://www.medicalnewstoday.com/articles/322951#maximizing-fertility" target="_blank" rel="noopener noreferrer" className="underline">ACOG - Your Menstrual Cycle</a>, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3131874/" target="_blank" rel="noopener noreferrer" className="underline">Nghiên cứu về tuổi thọ tinh trùng và trứng</a>
         </div>
       </div>
       <MenstrualCycleChart predictions={predictions} />

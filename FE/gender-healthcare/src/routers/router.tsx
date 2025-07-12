@@ -6,6 +6,8 @@ import CycleSummary from "../pages/CycleTracking/CycleSummary";
 import ProtectedRoute from "../components/ProtectedRoute";
 import AuthPage from "../pages/Auth/AuthPage";
 import MedicationReminderPage from '../pages/MedicationReminder/MedicationReminderPage';
+import BookingConsultationPage from '../pages/BookingConsultationPage';
+import ManagerDashboardPage from "../pages/ManagerDashboardPage";
 
 const routers = createBrowserRouter([
   {
@@ -53,6 +55,14 @@ const routers = createBrowserRouter([
         <MedicationReminderPage />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: '/booking-consultation',
+    element: <BookingConsultationPage />,
+  },
+  {
+    path: '/manager',
+    element: <ManagerDashboardPage />,
   },
 ]);
 

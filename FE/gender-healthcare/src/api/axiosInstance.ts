@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://localhost:7057/api", // hoặc "/api" nếu dùng proxy
+  baseURL: "http://localhost:5105/api", // hoặc "/api" nếu dùng proxy
 });
 
 axiosInstance.interceptors.request.use(

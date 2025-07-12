@@ -53,6 +53,14 @@ const PatientDashboard: React.FC = () => {
         <p className="text-lg text-pink-200 mb-8 text-center max-w-xl">
           Đây là dashboard dành cho bệnh nhân. Bạn có thể theo dõi chu kỳ kinh nguyệt, lịch sử và các cuộc hẹn tại đây.
         </p>
+        <div className="flex justify-center mb-6">
+          <NavLink
+            to="/booking-consultation"
+            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-2 rounded-full shadow transition"
+          >
+            Đặt lịch tư vấn mới
+          </NavLink>
+        </div>
         {/* TODO: Thêm các widget thống kê, lịch hẹn, v.v. */}
       </main>
     </div>
