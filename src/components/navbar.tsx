@@ -286,12 +286,7 @@ const Navbar = () => {
 
         {/* User section */}
         <div className="flex space-x-4 items-center">
-          <button
-            title="Thông báo"
-            className="text-purple-600 text-xl hover:text-purple-800"
-          >
-            🔔
-          </button>
+          
 
           {isLoggedIn ? (
             <div className="relative">

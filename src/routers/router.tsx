@@ -21,27 +21,18 @@ const routers = createBrowserRouter([
     children: [
       {
         path: "cycle-tracking",
-        element: (
-          <ProtectedRoute>
-            <CycleTracking />
-          </ProtectedRoute>
-        ),
+        element: <CycleTracking />
+     
       },
       {
         path: "period-calendar",
-        element: (
-          <ProtectedRoute>
-            <PeriodCalendarPage />
-          </ProtectedRoute>
-        ),
+        element: <PeriodCalendarPage />
+        
       },
       {
         path: "cycle-summary",
-        element: (
-          <ProtectedRoute>
-            <CycleSummary />
-          </ProtectedRoute>
-        ),
+        element: <CycleSummary />
+        
       },
       {
         path: "consultant",
@@ -50,8 +41,8 @@ const routers = createBrowserRouter([
       
       },
       {
-        path: "pricing",
-        element: <Pricing />,
+        path: "bang-gia",
+        element: <Pricing/>,
       },
 
       // ✅ Các route cho Cẩm nang
@@ -65,11 +56,11 @@ const routers = createBrowserRouter([
       },
        // ✅ Các route cho about us
       {
-        path: "gioi-thieu/he-thong-gendercare",
+        path: "gioi-thieu/he-thong",
         element: <GenderCare />,
       },
       {
-        path: "gioi-thieu/doi-ngu-chuyen-gia",
+        path: "gioi-thieu/doi-ngu",
         element: <OurMedicalTeam />,
       },
         {
@@ -78,7 +69,7 @@ const routers = createBrowserRouter([
       },
       // router cho Pathology
       {
-        path: "Pathology",
+        path: "benh-hoc",
         element: <Pathology />,
       },
     ],
@@ -96,11 +87,8 @@ const routers = createBrowserRouter([
  
   {
     path: "/medication-reminder",
-    element: (
-      <ProtectedRoute>
-        <MedicationReminderPage />
-      </ProtectedRoute>
-    ),
+    element:  <MedicationReminderPage />
+   
   },
 ]);
 

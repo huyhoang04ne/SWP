@@ -108,7 +108,7 @@ const ConsultationPage = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold text-purple-700 mb-4">Trang Tư Vấn</h1>
-
+      <div className="w-[200px] h-[3px] bg-purple-800 mb-6"></div>
       {showForm && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded shadow-lg w-full max-w-md">
