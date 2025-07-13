@@ -1,9 +1,8 @@
-
-// ✅ ConsultationPage.tsx with form popup + validation + type-safe fix for TS7053 & TS7006
-
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import "dayjs/locale/vi";
+import { bookConsultation } from "../../api/consultationApi";
+
 dayjs.locale("vi");
 
 const shifts = [
@@ -27,6 +26,7 @@ const experts = [
       "2025-07-13": ["Sáng", "Chiều"],
       "2025-07-14": ["Sáng", "Chiều"],
       "2025-07-15": ["Chiều"],
+      "2025-07-16": ["Sáng", "Chiều"],
     },
     profile: {
       introduction: "Chuyên gia tư vấn LGBTQ+ với hơn 10 năm kinh nghiệm.",
@@ -56,6 +56,7 @@ const ConsultationPage = () => {
   const next3Days = [1, 2, 3].map((i) => today.add(i, "day"));
   const [expandedDays, setExpandedDays] = useState([false, false, false]);
   const [showForm, setShowForm] = useState(false);
+  const [formDate, setFormDate] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     age: "",
@@ -82,30 +83,48 @@ const ConsultationPage = () => {
   const getStatusColor = (status: string) =>
     status === "full" ? "bg-red-500" : "bg-green-500";
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setFormError(null);
     setFormSuccess(null);
 
     const { name, age, gender, email, phone, shift } = formData;
-    if (!name || !age || !gender || !email || !phone || !shift) {
+    if (!name || !age || !gender || !email || !phone || !shift || !formDate) {
       setFormError("Bạn phải điền đầy đủ thông tin");
       return;
     }
 
-    if (shift === "Trưa" && userBookedShifts["2025-07-13"].includes("Trưa")) {
-      setFormError("Ca này đã có người đặt, vui lòng chọn lại");
-      return;
+    try {
+      const token = localStorage.getItem("token");
+      await bookConsultation(
+        {
+          ...formData,
+          date: formDate,
+        },
+        token || ""
+      );
+
+      setFormSuccess("Đã đăng ký thành công");
+      setFormData({
+        name: "",
+        age: "",
+        gender: "",
+        email: "",
+        phone: "",
+        shift: "",
+        note: "",
+      });
+      setFormDate("");
+    } catch (error: any) {
+      setFormError(error.message || "Đăng ký không thành công");
     }
-
-    setFormSuccess("Đã đăng kí thành công");
-    setFormData({ name: "", age: "", gender: "", email: "", phone: "", shift: "", note: "" });
   };
-
-  return (
+   return (
     <div className="p-6 max-w-7xl mx-auto">
       <h1 className="text-2xl font-bold text-purple-700 mb-4">Trang Tư Vấn</h1>
       <div className="w-[200px] h-[3px] bg-purple-800 mb-6"></div>
@@ -115,7 +134,12 @@ const ConsultationPage = () => {
             <h2 className="text-lg font-semibold mb-2 text-purple-700">Đăng ký lịch tư vấn</h2>
             <input name="name" placeholder="Tên" value={formData.name} onChange={handleInputChange} className="w-full mb-2 border px-2 py-1 rounded" />
             <input name="age" placeholder="Tuổi" value={formData.age} onChange={handleInputChange} className="w-full mb-2 border px-2 py-1 rounded" />
-            <input name="gender" placeholder="Giới tính" value={formData.gender} onChange={handleInputChange} className="w-full mb-2 border px-2 py-1 rounded" />
+            <select name="gender" value={formData.gender} onChange={handleInputChange} className="w-full mb-2 border px-2 py-1 rounded">
+              <option value="">-- Chọn giới tính --</option>
+              <option value="Nam">Nam</option>
+              <option value="Nữ">Nữ</option>
+              <option value="Khác">Khác</option>
+            </select>
             <input name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className="w-full mb-2 border px-2 py-1 rounded" />
             <input name="phone" placeholder="Số điện thoại" value={formData.phone} onChange={handleInputChange} className="w-full mb-2 border px-2 py-1 rounded" />
             <select name="shift" value={formData.shift} onChange={handleInputChange} className="w-full mb-2 border px-2 py-1 rounded">
