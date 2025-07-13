@@ -14,6 +14,8 @@ import GenderCare from "../pages/AboutUs/GenderCare";
 import OurMedicalTeam from "../pages/AboutUs/OurMedicalTeam";
 import Recruitment from "../pages/AboutUs/Recruitment";
 import Pathology from "../pages/Pathology/Pathology";
+import Stis from "../pages/stis/stis";
+
 const routers = createBrowserRouter([
   {
     path: "/",
@@ -37,9 +39,12 @@ const routers = createBrowserRouter([
       {
         path: "consultant",
        element: <Consultant/>,
-          
-      
       },
+       {
+        path: "stis",
+       element: <Stis/>,
+      },
+
       {
         path: "bang-gia",
         element: <Pricing/>,

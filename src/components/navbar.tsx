@@ -171,6 +171,18 @@ const Navbar = () => {
                   >
                     Tư vấn
                   </Link>
+
+                  <Link
+                    to="/stis"
+                    className={`block px-4 py-2 text-sm ${
+                      location.pathname === "/stis"
+                        ? "bg-purple-100 font-bold text-purple-800"
+                        : "text-purple-700 hover:bg-purple-100"
+                    }`}
+                    onClick={() => setOpenDropdown(null)}
+                  >
+                    Đặt lịch STIs
+                  </Link>
                 </li>
                 <li>
                   <Link
