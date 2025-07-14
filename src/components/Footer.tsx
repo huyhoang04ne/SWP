@@ -63,9 +63,9 @@ const Footer = () => {
           <p className="mb-2">
             CÔNG TY CỔ PHẦN GENDERCARE VIỆT NAM – Giấy chứng nhận ĐKKD số 0123456789 do Sở KHĐT TP.HCM cấp ngày 01/01/2020.
           </p>
-          <p>Địa chỉ: 123 Nguyễn Văn Cừ, Quận 5, TP. Hồ Chí Minh</p>
-          <p>Hotline: 028 7102 6595 | Email: support@gendercare.vn</p>
-          <p>Chịu trách nhiệm nội dung: Nguyễn Thanh Hằng</p>
+          <p>Địa chỉ: 7 Đ. D1, Long Thạnh Mỹ, Thủ Đức, Hồ Chí Minh 700000</p>
+          <p>Hotline: 0392042850| Email: support@gendercare.vn</p>
+          <p>Chịu trách nhiệm nội dung: Jos Nguyễn - Lê Minh Phúc</p>
           <p>Bản quyền ©2025 thuộc về GenderCare Việt Nam</p>
         </div>
       </div>
