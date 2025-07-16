@@ -8,6 +8,12 @@ import AuthPage from "../pages/Auth/AuthPage";
 import MedicationReminderPage from '../pages/MedicationReminder/MedicationReminderPage';
 import BookingConsultationPage from '../pages/BookingConsultationPage';
 import ManagerDashboardPage from "../pages/ManagerDashboardPage";
+import AdminDashboardPage from "../pages/AdminDashboardPage";
+import CounselorDashboard from "../pages/CounselorDashboard";
+import MySchedule from "../pages/MySchedule";
+import PatientConsultations from "../pages/PatientConsultations";
+import CounselorConsultations from "../pages/CounselorConsultations";
+import PaymentPage from "../pages/PaymentPage";
 
 const routers = createBrowserRouter([
   {
@@ -61,8 +67,56 @@ const routers = createBrowserRouter([
     element: <BookingConsultationPage />,
   },
   {
+    path: '/admin',
+    element: (
+      <ProtectedRoute>
+        <AdminDashboardPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: '/manager',
     element: <ManagerDashboardPage />,
+  },
+  {
+    path: '/counselor',
+    element: (
+      <ProtectedRoute>
+        <CounselorDashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/my-schedule',
+    element: (
+      <ProtectedRoute>
+        <MySchedule />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/patient-consultations',
+    element: (
+      <ProtectedRoute>
+        <PatientConsultations />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/counselor-consultations',
+    element: (
+      <ProtectedRoute>
+        <CounselorConsultations />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/payment/:appointmentId',
+    element: (
+      <ProtectedRoute>
+        <PaymentPage />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

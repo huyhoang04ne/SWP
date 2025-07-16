@@ -5,6 +5,7 @@ using GHMS.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using GHMS.Common.Config;
 using GHMS.Common.Helpers;
+using Microsoft.AspNetCore.Identity;
 
 namespace GHMS.BLL.Services
 {
@@ -15,19 +16,22 @@ namespace GHMS.BLL.Services
         private readonly NotificationTemplateSettings _notificationTemplates;
         private readonly EmailService _emailService;
         private readonly NotificationService _notificationService;
+        private readonly UserManager<AppUser> _userManager;
 
         public ConsultationService(
             GHMSContext context,
             ScheduleService scheduleService,
             NotificationTemplateSettings notificationTemplates,
             EmailService emailService,
-            NotificationService notificationService)
+            NotificationService notificationService,
+            UserManager<AppUser> userManager)
         {
             _context = context;
             _scheduleService = scheduleService;
             _notificationTemplates = notificationTemplates;
             _emailService = emailService;
             _notificationService = notificationService;
+            _userManager = userManager;
         }
 
         public async Task<BaseResponse> BookConsultationAsync(string patientId, ConsultationBookingReq req)
@@ -36,16 +40,47 @@ namespace GHMS.BLL.Services
             if (req.ScheduledDate.Date < DateTime.Today)
                 return BaseResponse.Fail("Không thể đặt lịch trong quá khứ.");
 
+            if (req.ScheduledDate.Date > DateTime.Today.AddMonths(3))
+                return BaseResponse.Fail("Không thể đặt lịch quá xa hiện tại (tối đa 3 tháng).");
+
             string counselorId = req.CounselorId;
 
-            // Nếu không chỉ định tư vấn viên, tự động gán
+            // Nếu không chỉ định tư vấn viên, tự động gán tối ưu
             if (string.IsNullOrEmpty(counselorId))
             {
+                // Lấy danh sách counselor có ca làm việc, còn available, và active
                 var availableCounselors = await _scheduleService.GetAvailableCounselors(req.ScheduledDate, req.TimeSlot);
                 if (!availableCounselors.Any())
-                    return BaseResponse.Fail("Không có tư vấn viên rảnh vào thời gian này.");
-                // Chọn random hoặc theo tiêu chí khác
-                counselorId = availableCounselors.First().Id;
+                    return BaseResponse.Fail("Không có tư vấn viên rảnh vào thời gian này. Vui lòng chọn thời gian khác hoặc liên hệ quản trị viên.");
+
+                // Lọc counselor còn hoạt động (không bị khóa)
+                var activeCounselors = new List<AppUser>();
+                foreach (var c in availableCounselors)
+                {
+                    var user = await _userManager.FindByIdAsync(c.Id);
+                    if (user != null && user.LockoutEnabled == false)
+                        activeCounselors.Add(user);
+                }
+                if (!activeCounselors.Any())
+                    return BaseResponse.Fail("Tất cả tư vấn viên rảnh đều đang bị khóa tài khoản. Vui lòng liên hệ quản trị viên.");
+
+                // Ưu tiên counselor có ít lịch nhất trong ngày/ca đó
+                var counselorWithBookingCount = new List<(AppUser Counselor, int Count)>();
+                foreach (var c in activeCounselors)
+                {
+                    int count = await _context.ConsultationSchedules.CountAsync(x =>
+                        x.CounselorId == c.Id &&
+                        x.ScheduledDate.Date == req.ScheduledDate.Date &&
+                        x.TimeSlot == req.TimeSlot &&
+                        !x.IsCanceled);
+                    counselorWithBookingCount.Add((c, count));
+                }
+                var minCount = counselorWithBookingCount.Min(x => x.Count);
+                var bestCounselors = counselorWithBookingCount.Where(x => x.Count == minCount).Select(x => x.Counselor).ToList();
+                // Random nếu nhiều counselor cùng số lượng booking
+                var random = new Random();
+                var selected = bestCounselors[random.Next(bestCounselors.Count)];
+                counselorId = selected.Id;
             }
 
             // Kiểm tra counselor có ca làm việc không
@@ -56,7 +91,7 @@ namespace GHMS.BLL.Services
                 w.IsAvailable);
 
             if (!isWorking)
-                return BaseResponse.Fail("Counselor không làm việc vào thời gian này.");
+                return BaseResponse.Fail($"Tư vấn viên đã chọn không làm việc vào thời gian này. Vui lòng chọn tư vấn viên khác hoặc thời gian khác.");
 
             // Kiểm tra counselor có đang bận không
             var isCounselorBusy = await _context.ConsultationSchedules.AnyAsync(c =>
@@ -66,7 +101,7 @@ namespace GHMS.BLL.Services
                 !c.IsCanceled);
 
             if (isCounselorBusy)
-                return BaseResponse.Fail("Counselor đã có lịch tư vấn vào thời gian này.");
+                return BaseResponse.Fail($"Tư vấn viên đã có lịch tư vấn vào thời gian này. Vui lòng chọn tư vấn viên khác hoặc thời gian khác.");
 
             // Kiểm tra bệnh nhân có trùng lịch không
             var isPatientBusy = await _context.ConsultationSchedules.AnyAsync(c =>
@@ -76,7 +111,7 @@ namespace GHMS.BLL.Services
                 !c.IsCanceled);
 
             if (isPatientBusy)
-                return BaseResponse.Fail("Bạn đã có cuộc hẹn tư vấn vào thời gian này.");
+                return BaseResponse.Fail("Bạn đã có cuộc hẹn tư vấn vào thời gian này. Vui lòng chọn thời gian khác.");
 
             // Tạo cuộc hẹn
             var booking = new ConsultationSchedule
@@ -93,6 +128,14 @@ namespace GHMS.BLL.Services
             _context.ConsultationSchedules.Add(booking);
             await _context.SaveChangesAsync();
 
+            // Sinh mã chuyển khoản thân thiện
+            if (booking.Id > 0)
+            {
+                var code = $"GHMS-{booking.ScheduledDate:yyyyMMdd}-{booking.Id.ToString().PadLeft(4, '0').Substring(booking.Id.ToString().Length > 4 ? booking.Id.ToString().Length - 4 : 0)}";
+                booking.TransferCode = code;
+                await _context.SaveChangesAsync();
+            }
+
             // Gửi thông báo email cho bệnh nhân và tư vấn viên
             var patient = await _context.Users.FindAsync(patientId);
             var counselor = await _context.Users.FindAsync(counselorId);
@@ -103,26 +146,28 @@ namespace GHMS.BLL.Services
                 await _emailService.SendEmailAsync(patient.Email, subject, body);
             }
 
-            return BaseResponse.Ok(booking, "Đã đặt lịch thành công, vui lòng chờ tư vấn viên xác nhận.");
+            return BaseResponse.Ok(ToDto(booking), "Đã đặt lịch thành công, vui lòng chờ tư vấn viên xác nhận.");
         }
 
-        public async Task<List<ConsultationSchedule>> GetBookingsByPatientAsync(string patientId)
+        public async Task<List<ConsultationDto>> GetBookingsByPatientAsync(string patientId)
         {
-            return await _context.ConsultationSchedules
+            var list = await _context.ConsultationSchedules
                 .Where(c => c.PatientId == patientId)
                 .OrderByDescending(c => c.ScheduledDate)
                 .ToListAsync();
+            return list.Select(ToDto).ToList();
         }
 
-        public async Task<List<ConsultationSchedule>> GetAppointmentsByCounselorAsync(string counselorId)
+        public async Task<List<ConsultationDto>> GetAppointmentsByCounselorAsync(string counselorId)
         {
-            return await _context.ConsultationSchedules
+            var list = await _context.ConsultationSchedules
                 .Where(c => c.CounselorId == counselorId)
                 .OrderByDescending(c => c.ScheduledDate)
                 .ToListAsync();
+            return list.Select(ToDto).ToList();
         }
 
-        public async Task<List<ConsultationSchedule>> GetAppointmentsByCounselorWithFilterAsync(
+        public async Task<List<ConsultationDto>> GetAppointmentsByCounselorWithFilterAsync(
     string counselorId, DateTime? fromDate, DateTime? toDate, ConsultationStatus? status)
 {
     var query = _context.ConsultationSchedules
@@ -137,7 +182,8 @@ namespace GHMS.BLL.Services
     if (status.HasValue)
         query = query.Where(c => c.Status == status.Value);
 
-    return await query.OrderBy(c => c.ScheduledDate).ToListAsync();
+    var list = await query.OrderBy(c => c.ScheduledDate).ToListAsync();
+    return list.Select(ToDto).ToList();
 }
 
         public async Task<BaseResponse> UpdateConsultationStatusAsync(int id, string counselorId, ConsultationStatusUpdateReq req)
@@ -193,6 +239,36 @@ namespace GHMS.BLL.Services
             booking.Status = ConsultationStatus.Cancelled;
             if (!string.IsNullOrEmpty(reason))
                 booking.Notes += $"\n[Huỷ lịch]: {reason}";
+
+            // Tự động hoàn tiền nếu đủ điều kiện
+            if (booking.PaymentId.HasValue)
+            {
+                var payment = await _context.Payments.FindAsync(booking.PaymentId.Value);
+                if (payment != null && payment.Status == "paid")
+                {
+                    bool shouldRefund = false;
+                    if (role == "Patient")
+                    {
+                        // Nếu patient huỷ trước 24h thì refund
+                        var now = DateTime.UtcNow.AddHours(7);
+                        if ((booking.ScheduledDate - now).TotalHours >= 24)
+                            shouldRefund = true;
+                    }
+                    else if (role == "Counselor")
+                    {
+                        // Counselor huỷ luôn refund
+                        shouldRefund = true;
+                    }
+                    if (shouldRefund)
+                    {
+                        // Gọi service refund (giả lập)
+                        payment.Status = "refunded";
+                        payment.RefundedAt = DateTime.UtcNow;
+                        booking.Status = ConsultationStatus.Refunded;
+                        // TODO: Nếu muốn gọi API refund MOMO thực tế, hãy gọi PaymentService.RefundPaymentAsync ở đây
+                    }
+                }
+            }
 
             await _context.SaveChangesAsync();
 
@@ -250,7 +326,7 @@ namespace GHMS.BLL.Services
                 await _emailService.SendEmailAsync(patient.Email, subject, body);
             }
 
-            return BaseResponse.Ok(proposal, "Đã gửi đề xuất đổi lịch cho bệnh nhân.");
+            return BaseResponse.Ok(null, "Đã gửi đề xuất đổi lịch cho bệnh nhân.");
         }
 
         public async Task<BaseResponse> RespondRescheduleAsync(string patientId, RespondRescheduleReq req)
@@ -449,12 +525,12 @@ namespace GHMS.BLL.Services
         /// <summary>
         /// Lấy danh sách lịch tư vấn có thể đánh dấu NoShow (đã kết thúc nhưng chưa được xử lý)
         /// </summary>
-        public async Task<List<ConsultationSchedule>> GetConsultationsForNoShowCheckAsync(string counselorId)
+        public async Task<List<ConsultationDto>> GetConsultationsForNoShowCheckAsync(string counselorId)
         {
             var today = DateTime.UtcNow.AddHours(7).Date; // Múi giờ Việt Nam
             var now = DateTime.UtcNow.AddHours(7);
 
-            return await _context.ConsultationSchedules
+            var list = await _context.ConsultationSchedules
                 .Include(c => c.Patient)
                 .Where(c => c.CounselorId == counselorId
                     && !c.IsCanceled
@@ -463,6 +539,62 @@ namespace GHMS.BLL.Services
                     && now >= c.ScheduledDate.Date.Add(TimeSlotHelper.GetDefaultEndTime(c.TimeSlot)))
                 .OrderByDescending(c => c.ScheduledDate)
                 .ToListAsync();
+            return list.Select(ToDto).ToList();
         }
+
+        /// <summary>
+        /// Lấy danh sách tất cả tư vấn viên (cho form đặt lịch)
+        /// </summary>
+        public async Task<List<AppUser>> GetAllCounselorsAsync()
+        {
+            var counselors = new List<AppUser>();
+            var allUsers = await _userManager.Users.ToListAsync();
+            
+            foreach (var user in allUsers)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                if (roles.Contains("Counselor"))
+                {
+                    counselors.Add(new AppUser
+                    {
+                        Id = user.Id,
+                        FullName = user.FullName,
+                        Email = user.Email,
+                        PhoneNumber = user.PhoneNumber
+                    });
+                }
+            }
+            
+            return counselors;
+        }
+
+        private static ConsultationDto ToDto(ConsultationSchedule c)
+        {
+            return new ConsultationDto
+            {
+                Id = c.Id,
+                PatientId = c.PatientId,
+                CounselorId = c.CounselorId,
+                ScheduledDate = c.ScheduledDate,
+                TimeSlot = (int)c.TimeSlot,
+                Status = (int)c.Status,
+                Notes = c.Notes,
+                IsCanceled = c.IsCanceled,
+                TransferCode = c.TransferCode
+            };
+        }
+    }
+
+    public class ConsultationDto
+    {
+        public int Id { get; set; }
+        public string? PatientId { get; set; }
+        public string? CounselorId { get; set; }
+        public DateTime ScheduledDate { get; set; }
+        public int TimeSlot { get; set; }
+        public int Status { get; set; }
+        public string? Notes { get; set; }
+        public bool IsCanceled { get; set; }
+        public string? TransferCode { get; set; }
     }
 }

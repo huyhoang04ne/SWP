@@ -12,9 +12,12 @@ namespace GHMS.DAL.Models
     public enum ConsultationStatus
     {
         Pending,
+        Proposed,
         Confirmed,
+        Paid,
         Completed,
         Cancelled,
+        Refunded,
         NoShow
     }
 
@@ -48,6 +51,10 @@ namespace GHMS.DAL.Models
         public bool IsCanceled { get; set; } = false;
 
         public string? Notes { get; set; }
+
+        public string? TransferCode { get; set; }
+
+        public int? PaymentId { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }

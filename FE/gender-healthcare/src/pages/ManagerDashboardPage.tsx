@@ -6,7 +6,10 @@ const ManagerDashboardPage = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Quản lý phân ca tư vấn viên</h1>
+      {/* UI mới đơn giản */}
       <AssignShiftForm />
+      {/* Nếu muốn giữ form cũ, có thể để dưới đây */}
+      {/* <AssignShiftForm /> */}
       <hr className="my-6" />
       <AvailableCounselorsList />
     </div>

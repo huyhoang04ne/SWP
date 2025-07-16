@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { login, register } from '../../api/authApi';
+import { jwtDecode } from 'jwt-decode';
 
 const AuthPage = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -27,14 +28,28 @@ const AuthPage = () => {
     try {
       if (isSignIn) {
         const res = await login({ email, password });
-        if (res.data && res.data.token && res.data.user) {
+        if (res.data && res.data.token) {
           localStorage.setItem('token', res.data.token);
-          localStorage.setItem('user', JSON.stringify(res.data.user));
-          if (res.data.user.role === 'Manager') {
-            window.location.href = '/manager';
-          } else if (res.data.user.role === 'Counselor') {
-            window.location.href = '/counselor';
-          } else {
+          try {
+            // Đảm bảo jwtDecode là function
+            const decoded: any = jwtDecode(res.data.token);
+            let role = decoded.role;
+            if (!role && decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']) {
+              role = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+            }
+            if (role) {
+              localStorage.setItem('role', role);
+              if (role === 'Manager') {
+                window.location.href = '/manager';
+              } else if (role === 'Counselor') {
+                window.location.href = '/counselor';
+              } else {
+                window.location.href = '/';
+              }
+            } else {
+              window.location.href = '/';
+            }
+          } catch (e) {
             window.location.href = '/';
           }
         } else {

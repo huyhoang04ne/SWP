@@ -1,19 +1,44 @@
-import React from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/Footer';
 import banner1 from '../../assets/gender_care_clinic_hero.jpg';
 import Header from '../../components/header'; // 
 
 const HomePage: React.FC = () => {
+  const [isManager, setIsManager] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    let role = localStorage.getItem("userRole");
+    let roles: string[] = [];
+    try {
+      roles = role ? JSON.parse(role) : [];
+    } catch {
+      if (role) roles = [role];
+    }
+    setIsManager(roles.includes("Manager"));
+  }, []);
 
   return (
     <div className="bg-gray-50 min-h-screen flex flex-col font-[Segoe_UI]">
       {/* Navbar luôn hiện */}
       <Header />   
       <Navbar />
+
+      {/* Nút quay lại trang manager */}
+      {isManager && (
+        <div className="flex justify-end p-4">
+          <button
+            onClick={() => navigate("/manager")}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 font-semibold"
+          >
+            📋 Quay lại Quản lý phân ca tư vấn viên
+          </button>
+        </div>
+      )}
 
       {/* Nội dung chính */}
       <main className="flex-grow">
