@@ -9,7 +9,7 @@ using GHMS.DAL.Models;
 namespace GHMS.Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/appointments")]
     public class ConsultationController : ControllerBase
     {
         private readonly ConsultationService _service;
@@ -21,8 +21,9 @@ namespace GHMS.Web.Controllers
             _scheduleService = scheduleService;
         }
 
+        // Đặt lịch (Patient)
         [Authorize(Roles = "Patient")]
-        [HttpPost("book")]
+        [HttpPost]
         public async Task<IActionResult> BookConsultation([FromBody] ConsultationBookingReq req)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -33,8 +34,9 @@ namespace GHMS.Web.Controllers
             return res.Success ? Ok(res) : BadRequest(res);
         }
 
+        // Counselor xác nhận/trả lời yêu cầu (confirm/reject)
         [Authorize(Roles = "Counselor")]
-        [HttpPut("update-status/{id}")]
+        [HttpPut("{id}/status")]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] ConsultationStatusUpdateReq req)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -45,8 +47,45 @@ namespace GHMS.Web.Controllers
             return res.Success ? Ok(res) : BadRequest(res);
         }
 
+        // Counselor đề xuất đổi lịch
+        [Authorize(Roles = "Counselor")]
+        [HttpPost("{id}/propose")]
+        public async Task<IActionResult> ProposeReschedule(int id, [FromBody] RescheduleProposalReq req)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            req.OldBookingId = id;
+            var res = await _service.ProposeRescheduleAsync(userId, req);
+            return res.Success ? Ok(res) : BadRequest(res);
+        }
+
+        // Patient phản hồi đề xuất đổi lịch
         [Authorize(Roles = "Patient")]
-        [HttpGet("my-bookings")]
+        [HttpPost("{id}/respond-proposal")]
+        public async Task<IActionResult> RespondReschedule(int id, [FromBody] RespondRescheduleReq req)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            req.ProposalId = id;
+            var res = await _service.RespondRescheduleAsync(userId, req);
+            return res.Success ? Ok(res) : BadRequest(res);
+        }
+
+        // Huỷ lịch (Patient hoặc Counselor)
+        [Authorize(Roles = "Patient,Counselor")]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> CancelConsultation(int id, [FromQuery] string? reason = null)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var role = User.FindFirstValue(ClaimTypes.Role);
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(role))
+                return Unauthorized();
+
+            var res = await _service.CancelConsultationAsync(id, userId, role, reason);
+            return res.Success ? Ok(res) : BadRequest(res);
+        }
+
+        // Lấy lịch của patient
+        [Authorize(Roles = "Patient")]
+        [HttpGet("my")]
         public async Task<IActionResult> GetMyBookings()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -57,8 +96,9 @@ namespace GHMS.Web.Controllers
             return Ok(res);
         }
 
+        // Lấy lịch của counselor
         [Authorize(Roles = "Counselor")]
-        [HttpGet("my-appointments")]
+        [HttpGet("counselor/my")]
         public async Task<IActionResult> GetMyAppointments(
             [FromQuery] DateTime? fromDate,
             [FromQuery] DateTime? toDate,
@@ -72,39 +112,9 @@ namespace GHMS.Web.Controllers
             return Ok(res);
         }
 
-        [Authorize(Roles = "Patient,Counselor")]
-        [HttpDelete("cancel/{id}")]
-        public async Task<IActionResult> CancelConsultation(int id, [FromQuery] string? reason = null)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var role = User.FindFirstValue(ClaimTypes.Role);
-            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(role))
-                return Unauthorized();
-
-            var res = await _service.CancelConsultationAsync(id, userId, role, reason);
-            return res.Success ? Ok(res) : BadRequest(res);
-        }
-
+        // Đánh dấu no-show (Counselor)
         [Authorize(Roles = "Counselor")]
-        [HttpPost("propose-reschedule")]
-        public async Task<IActionResult> ProposeReschedule([FromBody] RescheduleProposalReq req)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var res = await _service.ProposeRescheduleAsync(userId, req);
-            return res.Success ? Ok(res) : BadRequest(res);
-        }
-
-        [Authorize(Roles = "Patient")]
-        [HttpPost("respond-reschedule")]
-        public async Task<IActionResult> RespondReschedule([FromBody] RespondRescheduleReq req)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var res = await _service.RespondRescheduleAsync(userId, req);
-            return res.Success ? Ok(res) : BadRequest(res);
-        }
-
-        [Authorize(Roles = "Counselor")]
-        [HttpPost("mark-no-show/{id}")]
+        [HttpPost("{id}/mark-no-show")]
         public async Task<IActionResult> MarkPatientNoShow(int id)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -115,8 +125,9 @@ namespace GHMS.Web.Controllers
             return res.Success ? Ok(res) : BadRequest(res);
         }
 
+        // Lấy danh sách lịch có thể đánh dấu no-show
         [Authorize(Roles = "Counselor")]
-        [HttpGet("no-show-candidates")]
+        [HttpGet("counselor/no-show-candidates")]
         public async Task<IActionResult> GetNoShowCandidates()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

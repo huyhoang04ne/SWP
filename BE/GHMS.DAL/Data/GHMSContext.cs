@@ -19,6 +19,7 @@ namespace GHMS.DAL.Data
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<RescheduleProposal> RescheduleProposals { get; set; }
         public DbSet<ConsultationReminder> ConsultationReminders { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

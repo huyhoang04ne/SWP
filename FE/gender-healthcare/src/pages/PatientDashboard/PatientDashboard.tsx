@@ -17,6 +17,11 @@ const navItems = [
     label: "My Appointment",
     icon: "📅",
   },
+  {
+    to: "/patient-consultations",
+    label: "My Consultations",
+    icon: "👨‍⚕️",
+  },
 ];
 
 const PatientDashboard: React.FC = () => {

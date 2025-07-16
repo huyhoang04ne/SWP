@@ -33,6 +33,9 @@ namespace GHMS.DAL.Models
 
         public string? Notes { get; set; }
 
+        public string? AssignedBy { get; set; } // Id của Manager (nếu có)
+        public bool IsAutoAssigned { get; set; } = false; // true: counselor tự đăng ký, false: manager gán
+
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
 }

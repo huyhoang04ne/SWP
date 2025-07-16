@@ -5,12 +5,25 @@ import { logout } from "../api/authApi";
 const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const [userRoles, setUserRoles] = useState<string[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    let role = localStorage.getItem("userRole");
+    let roles: string[] = [];
+    try {
+      // Nếu backend trả về dạng mảng
+      roles = role ? JSON.parse(role) : [];
+    } catch {
+      // Nếu là chuỗi
+      if (role) roles = [role];
+    }
     setIsLoggedIn(!!token);
+    setUserRole(roles.length > 0 ? roles[0] : null);
+    setUserRoles(roles);
   }, []);
 
   const toggleDropdown = (menu: string) =>
@@ -19,6 +32,7 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     setIsLoggedIn(false);
+    setUserRole(null);
     setOpenDropdown(null);
   };
 
@@ -127,6 +141,8 @@ const Navbar = () => {
             )}
           </li>
 
+
+
           <li>
             <Link
               to="/cam-nang"
@@ -192,12 +208,89 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => toggleDropdown("user-menu")}
-                className="text-purple-700 font-semibold text-sm hover:underline"
+                className="text-purple-700 font-semibold text-sm hover:underline flex items-center gap-1"
               >
-                👤
+                <span>👤</span>
+                <span>{userRole || 'User'}</span>
               </button>
               {openDropdown === "user-menu" && (
-                <ul className="absolute right-0 mt-2 w-44 bg-white border border-purple-200 rounded-md shadow-lg z-10 text-sm">
+                <ul className="absolute right-0 mt-2 w-56 bg-white border border-purple-200 rounded-md shadow-lg z-10 text-sm">
+                  {/* Dashboard links theo role */}
+                  {userRoles.includes("Admin") && (
+                    <li>
+                      <Link
+                        to="/admin"
+                        className={`block px-4 py-2 text-purple-700 hover:bg-purple-100 ${location.pathname === "/admin" ? "font-bold" : ""}`}
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        🛠️ Bảng điều khiển Admin
+                      </Link>
+                    </li>
+                  )}
+                  {userRoles.includes("Manager") && (
+                    <li>
+                      <Link
+                        to="/manager"
+                        className={`block px-4 py-2 text-purple-700 hover:bg-purple-100 ${location.pathname === "/manager" ? "font-bold" : ""}`}
+                        onClick={() => setOpenDropdown(null)}
+                      >
+                        📋 Quản lý phân ca tư vấn viên
+                      </Link>
+                    </li>
+                  )}
+                  {userRoles.includes("Counselor") && (
+                    <>
+                      <li>
+                        <Link
+                          to="/counselor"
+                          className={`block px-4 py-2 text-purple-700 hover:bg-purple-100 ${location.pathname === "/counselor" ? "font-bold" : ""}`}
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          📊 Dashboard Tư vấn viên
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/counselor-consultations"
+                          className={`block px-4 py-2 text-purple-700 hover:bg-purple-100 ${location.pathname === "/counselor-consultations" ? "font-bold" : ""}`}
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          📅 Quản lý lịch tư vấn
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/my-schedule"
+                          className={`block px-4 py-2 text-purple-700 hover:bg-purple-100 ${location.pathname === "/my-schedule" ? "font-bold" : ""}`}
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          🕐 Lịch làm việc
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                  {userRoles.includes("Patient") && (
+                    <>
+                      <li>
+                        <Link
+                          to="/patient-consultations"
+                          className={`block px-4 py-2 text-purple-700 hover:bg-purple-100 ${location.pathname === "/patient-consultations" ? "font-bold" : ""}`}
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          👤 Lịch tư vấn của tôi
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/booking-consultation"
+                          className={`block px-4 py-2 text-purple-700 hover:bg-purple-100 ${location.pathname === "/booking-consultation" ? "font-bold" : ""}`}
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          🆕 Đặt lịch mới
+                        </Link>
+                      </li>
+                    </>
+                  )}
                   <li>
                     <Link
                       to="/profile"
